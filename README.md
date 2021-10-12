@@ -48,15 +48,24 @@ https://www.youtube.com/watch?v=UGArg1kQwFc&list=PLI79e6UyigXUgY9uMvNvmbnWqMfh0j
 
 https://markhedleyjones.com/projects/calibration-checkerboard-collection
 
-(NOTE: when running the `rosrun camera_calibration cameracalibrator.py --size 8x6 --square 0.023 image:=/usb_cam/image_raw camera:=/usb_cam` command, you must specify the `--size 8x6` flag to match the dimensions of your checkerboard - 1.
+(NOTE: when running the `rosrun camera_calibration cameracalibrator.py --size 8x6 --square 0.023 image:=/usb_cam/image_raw camera:=/usb_cam` command, you must specify the `--size 8x6` flag to match the dimensions of your checkerboard -1.
 For example, for a checkerboard of size 11x8 square you would input `--size 10x7`)
 
 Remember to update your `~/project_ws/src/apriltag_ros/apriltag_ros/scripts/camera_info.py` node with your custom parameters from the camera calibration :)
 
+IMPORTANT
+
+We need to prevent git from tracking the `camera_info.py` node that keeps each one of our individual camera parameters.
+
+To do this
+
+```
+cd ~/project_ws/src/apriltag_ros
+```
+```
+git update-index --assume-unchanged ~/project_ws/src/apriltag_ros/apriltag_ros/scripts/camera_info.py
+```
 Once you are done calibrating run
-```
-cd ~/project_ws
-```
 ```
 catkin build
 ```
