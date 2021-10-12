@@ -38,8 +38,11 @@ source ~/.bashrc && source ~/project_ws/devel/setup.bash
 ```
 ### To calibrate your camera and print a sample checkerboard for your calibration
 Useful links:
+
 https://www.youtube.com/watch?v=UGArg1kQwFc&list=PLI79e6UyigXUgY9uMvNvmbnWqMfh0j2Oh&index=5
+
 https://markhedleyjones.com/projects/calibration-checkerboard-collection
+
 (NOTE: when running the `rosrun camera_calibration cameracalibrator.py --size 8x6 --square 0.023 image:=/usb_cam/image_raw camera:=/usb_cam` command, you must specify the `--size 8x6` flag to match the dimensions of your checkerboard - 1.
 For example, for a checkerboard of size 11x8 square you would input `--size 10x7`)
 
