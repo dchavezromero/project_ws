@@ -88,4 +88,4 @@ rqt_image_view
 ```
 rosrun rviz rviz
 ```
-Add the `/tf` topic, put the apriltag on-screen, and change the base frame to `tagN` and then to `camera` 
+On RVIZ, add the `/tf` topic, put the apriltag on-screen, and change the base frame to `tagN` and then to `camera` 
