@@ -15,17 +15,14 @@ Needed for computer vision-related packages that the `apriltag_ros` depends on
 pip install opencv-python
 ```
 ## Installation instructions
-To clone the project (if you have an SSH key setup on your machine)
 ```
 cd ~
 ```
+To clone the project (if you have an SSH key setup on your machine)
 ```
 git clone git@github.com:dchavezromero/project_ws.git
 ```
 Without SSH
-```
-cd ~
-```
 ```
 git clone https://github.com/dchavezromero/project_ws.git
 ```
