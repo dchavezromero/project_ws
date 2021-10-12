@@ -36,6 +36,11 @@ cd ~/project_ws
 ```
 source ~/.bashrc && source ~/project_ws/devel/setup.bash
 ```
+Finally
+```
+catkin clean -y
+```
+Just in case...
 ### To calibrate your camera and print a sample checkerboard for your calibration
 Useful links:
 
