@@ -37,7 +37,10 @@ Finally
 ```
 catkin clean -y
 ```
-Just in case...
+```
+catkin build
+```
+
 ### To calibrate your camera and print a sample checkerboard for your calibration
 Useful links:
 
