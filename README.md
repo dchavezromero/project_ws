@@ -1,7 +1,7 @@
 # RBE 501 Project
 Final project for RBE501
 
-### Dependencies
+## Dependencies
 ### `catkin_tool` for setting the build space of our project
 ```
 cd ~
@@ -14,7 +14,7 @@ Needed for computer vision-related packages that the `apriltag_ros` depends on
 ```
 pip install opencv-python
 ```
-### Installation instructions
+## Installation instructions
 To clone the project (if you have an SSH key setup on your machine)
 ```
 cd ~
@@ -74,7 +74,7 @@ catkin build
 
 https://mega.nz/file/BJY3yQyQ#xkId2YbRF0LyPksN9ykok3dREEPiXEPVEMFOuhKWmt4
 
-### To run the sample apriltag detection node
+## Running the sample apriltag detection node
 ```
 cd ~/project_ws && source ~/project_ws/devel/setup.bash
 ```
