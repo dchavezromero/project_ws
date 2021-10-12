@@ -70,6 +70,10 @@ Once you are done calibrating run
 catkin build
 ```
 
+### Print a sample apriltag from the tag36h11 family from this link
+
+https://mega.nz/file/BJY3yQyQ#xkId2YbRF0LyPksN9ykok3dREEPiXEPVEMFOuhKWmt4
+
 ### To run the sample apriltag detection node
 ```
 cd ~/project_ws && source ~/project_ws/devel/setup.bash
@@ -84,4 +88,4 @@ rqt_image_view
 ```
 rosrun rviz rviz
 ```
-Add the `/tf` topic, put the apriltag on-screen, and change the base frame to `camera` 
+Add the `/tf` topic, put the apriltag on-screen, and change the base frame to `tagN` and then to `camera` 
