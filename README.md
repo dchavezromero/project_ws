@@ -53,7 +53,7 @@ For example, for a checkerboard of size 11x8 square you would input `--size 10x7
 
 Remember to update your `~/project_ws/src/apriltag_ros/apriltag_ros/scripts/camera_info.py` node with your custom parameters from the camera calibration :)
 
-#IMPORTANT
+### IMPORTANT
 
 We need to prevent git from tracking the `camera_info.py` node that keeps each one of our individual camera parameters.
 
