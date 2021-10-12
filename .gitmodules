@@ -1,0 +1,12 @@
+[submodule "apriltag_ros"]
+	path = apriltag_ros
+	url = git@github.com:dchavezromero/apriltag_ros.git
+[submodule "src/apriltag_ros"]
+	path = src/apriltag_ros
+	url = git@github.com:dchavezromero/apriltag_ros.git
+[submodule "src/usb_cam"]
+	path = src/usb_cam
+	url = git@github.com:ros-drivers/usb_cam.git
+[submodule "src/apriltag"]
+	path = src/apriltag
+	url = git@github.com:AprilRobotics/apriltag.git
