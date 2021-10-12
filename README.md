@@ -1,4 +1,4 @@
-# rbe501_project
+# RBE 501 Project
 Final project for RBE501
 
 ## Dependencies
