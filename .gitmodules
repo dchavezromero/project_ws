@@ -7,3 +7,6 @@
 [submodule "src/apriltag"]
 	path = src/apriltag
 	url = git@github.com:AprilRobotics/apriltag.git
+[submodule "src/joint_state_publisher"]
+	path = src/joint_state_publisher
+	url = git@github.com:ros/joint_state_publisher.git
