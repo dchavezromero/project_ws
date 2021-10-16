@@ -9,6 +9,11 @@ sudo apt-get update
 sudo apt-get install python3-catkin-tools
 ```
 
+### `rospkg` for Python2
+```
+pip install rospkg
+```
+
 ### OpenCV for Python2
 Needed for computer vision-related packages that the `apriltag_ros` depends on
 ```
