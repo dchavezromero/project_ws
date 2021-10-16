@@ -3,8 +3,93 @@
   <gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
       <robotNamespace>/</robotNamespace>
+      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
     </plugin>
   </gazebo>
+
+  <!-- Base link -->
+  <gazebo reference="world">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+  <!-- Link0 -->
+  <gazebo reference="panda_link0">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/White</material>
+  </gazebo>
+
+  <!-- Link1 -->
+  <gazebo reference="panda_link1">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/White</material>
+  </gazebo>
+
+  <!-- Link2 -->
+  <gazebo reference="panda_link2">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/Grey</material>
+  </gazebo>
+
+  <!-- Link3 -->
+  <gazebo reference="panda_link3">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/White</material>
+  </gazebo>
+
+  <!-- Link4 -->
+  <gazebo reference="panda_link4">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/White</material>
+  </gazebo>
+
+  <!-- Link5 -->
+  <gazebo reference="panda_link5">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/White</material>
+  </gazebo>
+
+  <!-- Link6 -->
+  <gazebo reference="panda_link6">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/White</material>
+  </gazebo>
+
+  <!-- Link7 -->
+  <gazebo reference="panda_link7">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/White</material>
+  </gazebo>
+
+
+  <!-- Hand -->
+  <gazebo reference="panda_hand">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/White</material>
+  </gazebo>
+
+  <!-- Left_Finger -->
+  <gazebo reference="panda_leftfinger">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/Grey</material>
+  </gazebo>
+
+  <!-- Right_Finger -->
+  <gazebo reference="panda_rightfinger">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/Grey</material>
+  </gazebo>
+
 
   <!-- <gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
@@ -13,7 +98,7 @@
     </plugin>
   </gazebo> -->
   
-	<gazebo reference="panda_link0"/>
+	<!-- <gazebo reference="panda_link0"/>
 	<gazebo reference="panda_link1"/>
 	<gazebo reference="panda_link2"/>
 	<gazebo reference="panda_link3"/>
@@ -91,5 +176,5 @@
     <actuator name="panda_joint7_motor">
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
-  </transmission>
+  </transmission> -->
 </robot>

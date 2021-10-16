@@ -1,20 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <robot name="panda" xmlns:xacro="http://www.ros.org/wiki/xacro">
-  <!-- <xacro:macro name="panda_arm" params="arm_id:='panda' package_name:='panda_arm' connected_to:='' xyz:='0 0 0' rpy:='0 0 0'">
-    <xacro:unless value="${not connected_to}">
-      <link name="${connected_to}"/>
-      <joint name="panda_joint_${connected_to}" type="fixed">
-        <parent link="${connected_to}"/>
-        <child link="panda_link0"/>
-        <origin rpy="0 0 0" xyz="0 0 0"/>
-      </joint>
-    </xacro:unless> -->
 
-  <xacro:arg name="gazebo" default="true"/>
-  <xacro:if value="$(arg gazebo)">
-    <!-- Gazebo Tags -->
-    <xacro:include filename="$(find panda_arm)/robots/panda_arm.gazebo.xacro"/>
-  </xacro:if>
+  <xacro:include filename="$(find panda_arm)/robots/panda_arm.gazebo"/>
 
   <link name="world"/>
 
@@ -274,14 +261,98 @@
     <limit effort="12" lower="-2.8973" upper="2.8973" velocity="2.6100"/>
   </joint>
 
-  <link name="panda_link8"/>
+  <!-- <link name="panda_hand"/> -->
 
   <joint name="panda_joint8" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0 0.107"/>
+    <origin rpy="0 0 ${-pi/4}" xyz="0 0 0.107"/>
     <parent link="panda_link7"/>
-    <child link="panda_link8"/>
+    <child link="panda_hand"/>
     <axis xyz="0 0 0"/>
   </joint>
 
-  <!-- </xacro:macro> -->
+  <link name="panda_hand">
+      <inertial>
+        <mass value="0.73" />
+        <origin xyz="0 0.0015244 0.0275912" rpy="0 0 0" />
+        <inertia ixx="0.00278560230025" ixy="0.0" ixz="0.0" iyy="0.000400033405336" iyz="0.0" izz="0.00256378041832" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://panda_arm/meshes/visual/hand.dae"/>
+        </geometry>
+        <material name="">
+          <color rgba="1 1 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://panda_arm/meshes/collision/hand.stl"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="panda_leftfinger">
+      <inertial>
+        <mass value="0.1" />
+        <origin xyz="0 0.0145644 0.0227941" rpy="0 0 0" />
+        <inertia ixx="3.01220925051e-05" ixy="0.0" ixz="0.0" iyy="2.95873808038e-05" iyz="0.0" izz="6.95125211657e-06" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://panda_arm/meshes/visual/finger.dae"/>
+        </geometry>
+        <material name="">
+          <color rgba="1 1 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://panda_arm/meshes/collision/finger.stl"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="panda_rightfinger">
+      <inertial>
+        <mass value="0.1" />
+        <origin xyz="0 0.0145644 0.0227941" rpy="0 0 ${pi}" />
+        <inertia ixx="3.01220925051e-05" ixy="0.0" ixz="0.0" iyy="2.95873808038e-05" iyz="0.0" izz="6.95125211657e-06" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 ${pi}"/>
+        <geometry>
+          <mesh filename="package://panda_arm/meshes/visual/finger.dae"/>
+        </geometry>
+        <material name="">
+          <color rgba="1 1 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 ${pi}"/>
+        <geometry>
+          <mesh filename="package://panda_arm/meshes/collision/finger.stl"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="panda_finger_joint1" type="prismatic">
+      <parent link="panda_hand"/>
+      <child link="panda_leftfinger"/>
+      <origin xyz="0 0 0.0584" rpy="0 0 0"/>
+      <axis xyz="0 1 0"/>
+      <limit effort="20" lower="-0.001" upper="0.04" velocity="0.3"/>
+    </joint>
+
+    <joint name="panda_finger_joint2" type="prismatic">
+      <parent link="panda_hand"/>
+      <child link="panda_rightfinger"/>
+      <origin xyz="0 0 0.0584" rpy="0 0 0"/>
+      <axis xyz="0 -1 0"/>
+      <limit effort="20" lower="-0.001" upper="0.04" velocity="0.3"/>
+    </joint>
+
 </robot>
