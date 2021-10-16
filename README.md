@@ -91,6 +91,10 @@ On a different set of terminals
 rqt_image_view
 ```
 ```
-rosrun rviz rviz
+roslaunch apriltag_ros continuous_detection.launch
 ```
-On RVIZ, add the `/tf` topic, put the apriltag on-screen, and change the base frame to `tagN` and then to `camera` 
+```
+roslaunch panda_arm panda_arm_rviz.launch
+```
+Place the arpiltag in front of your camera.
+On RVIZ, change the base frame to `tagN` and then to `camera` 
