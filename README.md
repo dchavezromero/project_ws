@@ -31,7 +31,7 @@ git submodule update --init --recursive
 ```
 Clean and build the workspace
 ```
-catkin clean -y
+catkin clean -b && catkin clean -y
 ```
 ```
 catkin build
