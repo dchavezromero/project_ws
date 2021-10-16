@@ -83,9 +83,6 @@ https://mega.nz/file/BJY3yQyQ#xkId2YbRF0LyPksN9ykok3dREEPiXEPVEMFOuhKWmt4
 ```
 cd ~/project_ws && source ~/project_ws/devel/setup.bash
 ```
-```
-roslaunch apriltag_ros continuous_detection.launch
-```
 On a different set of terminals
 ```
 rqt_image_view
