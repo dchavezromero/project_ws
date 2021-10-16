@@ -26,20 +26,25 @@ Without SSH
 ```
 git clone https://github.com/dchavezromero/project_ws.git
 ```
-Source your `~/.bashrc` and the project folder `setup.bash` files
+Initalize every submodule from our `/src` folder
 ```
 cd ~/project_ws
 ```
 ```
-source ~/.bashrc && source ~/project_ws/devel/setup.bash
+git submodule update --init --recursive
 ```
-Finally
+Clean and build the workspace
 ```
 catkin clean -y
 ```
 ```
 catkin build
 ```
+Finally, source your `~/.bashrc` and the project folder `setup.bash` files
+```
+source ~/.bashrc && source ~/project_ws/devel/setup.bash
+```
+
 
 ### To calibrate your camera and print a sample checkerboard for your calibration
 Useful links:
