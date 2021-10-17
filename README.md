@@ -4,9 +4,19 @@ Final project for RBE501
 ## Dependencies
 ### `catkin_tool` for setting the build space of our project
 ```
-cd ~
+sudo sh \
+    -c 'echo "deb http://packages.ros.org/ros/ubuntu `lsb_release -sc` main" \
+        > /etc/apt/sources.list.d/ros-latest.list'
+wget http://packages.ros.org/ros.key -O - | sudo apt-key add -
+```
+```
 sudo apt-get update
 sudo apt-get install python3-catkin-tools
+```
+
+### `rospkg` for Python2
+```
+pip install rospkg
 ```
 
 ### OpenCV for Python2
@@ -18,13 +28,9 @@ pip install opencv-python
 ```
 cd ~
 ```
-To clone the project (if you have an SSH key setup on your machine)
+To clone the project (needs SSH key setup on your machine -- URL for tutorial: https://docs.github.com/en/enterprise-server@3.0/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)
 ```
 git clone git@github.com:dchavezromero/project_ws.git
-```
-Without SSH
-```
-git clone https://github.com/dchavezromero/project_ws.git
 ```
 Initalize every submodule from our `/src` folder
 ```
@@ -35,7 +41,7 @@ git submodule update --init --recursive
 ```
 Clean and build the workspace
 ```
-catkin clean -y
+catkin clean -b && catkin clean -y
 ```
 ```
 catkin build
