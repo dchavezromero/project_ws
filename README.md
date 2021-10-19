@@ -1,3 +1,6 @@
+## IMPORTANT!
+This project was developed for Ubuntu 18.04. and ROS Melodic.
+
 # RBE 501 Project
 Final project for RBE501
 
