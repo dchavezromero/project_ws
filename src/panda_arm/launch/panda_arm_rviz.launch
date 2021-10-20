@@ -7,6 +7,13 @@
 
 	<param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
 
+	<include file="$(find gazebo_ros)/launch/empty_world.launch">
+		<arg name="world_name" value="worlds/empty.world"/> 
+		<arg name="paused" value="false"/>
+		<arg name="use_sim_time" value="true"/>
+		<arg name="gui" value="false"/>
+  	</include>
+
 	<node pkg="robot_state_publisher" type="robot_state_publisher" name="rob_st_pub"/> 
 	<node if="$(arg gui)" name="joint_state_publisher" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />
 	<node unless="$(arg gui)" name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
