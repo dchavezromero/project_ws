@@ -103,4 +103,4 @@ roslaunch apriltag_ros continuous_detection.launch
 roslaunch panda_arm panda_arm_rviz.launch
 ```
 Place the arpiltag in front of your camera.
-On RVIZ, change the base frame to `tagN` and then to `camera` 
+On RVIZ, change the base frame to `tagN` and then to `world` 
