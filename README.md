@@ -27,6 +27,12 @@ Needed for computer vision-related packages that the `apriltag_ros` depends on
 ```
 pip install opencv-python
 ```
+
+### `sympy` for Python2
+```
+pip2 install sympy
+```
+
 ## Installation instructions
 ```
 cd ~
