@@ -7,8 +7,8 @@ from kinematics.msg import joint_angles
 
 joint_names = 'panda_joint1', 'panda_joint2', 'panda_joint3', 'panda_joint4', 'panda_joint5', 'panda_joint6', 'panda_joint7'
 
-Kp_vals = [50, 50, 10, 10, 10, 10, 10]
-Kd_vals = [5, 1, 5, 7, 7, 5, 5]
+Kp_vals = [12000, 30000, 18000, 18000, 12000, 7000, 2000]
+Kd_vals = [50, 100, 50, 70, 70, 50, 20]
 
 # 10Hz frequency
 ros_rate = 10.0
@@ -53,7 +53,7 @@ def write_effort(effort, duration_sec, joint_name):
         joint_req = ApplyJointEffortRequest()
         joint_req.joint_name = joint_name
         joint_req.effort = effort
-        joint_req.duration.nsecs = duration_sec * 100000000 #Convert sampling rate to nanoseconds
+        joint_req.duration.nsecs = duration_sec * 1000000000 #Convert sampling rate to nanoseconds
         res = joint_call(joint_req)
     except rospy.ServiceException as e:
         print("Service call failed: %s"%e)
@@ -90,7 +90,7 @@ def do_pd_control(set_point, curr_point, joint_name):
 
         # PD output
         effort = position_err*Kp_vals[0] + derivative_err*Kd_vals[0]
-        rospy.loginfo(effort)
+        # rospy.loginfo(effort)
     elif (joint_name is 'panda_joint2'):
 
         derivative_err = (last_positions[1] - curr_point)/sampling_rate
