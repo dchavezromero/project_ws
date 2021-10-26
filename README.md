@@ -41,13 +41,9 @@ To clone the project (needs SSH key setup on your machine -- URL for tutorial: h
 ```
 git clone --recursive git@github.com:dchavezromero/project_ws.git
 ```
-Clean and build the workspace
+Build the workspace
 ```
 cd ~/project_ws
-```
-Simply carry on if the commands below do not work and run a `catkin clean -y && catkin build` (or vice-versa) at a later time
-```
-catkin clean -b && catkin clean -y
 ```
 ```
 catkin build
