@@ -39,16 +39,13 @@ cd ~
 ```
 To clone the project (needs SSH key setup on your machine -- URL for tutorial: https://docs.github.com/en/enterprise-server@3.0/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)
 ```
-git clone git@github.com:dchavezromero/project_ws.git
+git clone --recursive git@github.com:dchavezromero/project_ws.git
 ```
-Initalize every submodule from our `/src` folder
+Clean and build the workspace
 ```
 cd ~/project_ws
 ```
-```
-git submodule update --init --recursive
-```
-Clean and build the workspace
+Simply carry on if the commands below do not work and run a `catkin clean -y && catkin build` (or vice-versa) at a later time
 ```
 catkin clean -b && catkin clean -y
 ```
