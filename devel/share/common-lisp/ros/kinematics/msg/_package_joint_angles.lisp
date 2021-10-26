@@ -1,1 +1,0 @@
-/home/dennis/project_ws/devel/.private/kinematics/share/common-lisp/ros/kinematics/msg/_package_joint_angles.lisp

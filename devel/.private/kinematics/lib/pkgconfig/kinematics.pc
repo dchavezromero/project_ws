@@ -1,8 +1,0 @@
-prefix=/home/dennis/project_ws/devel/.private/kinematics
-
-Name: kinematics
-Description: Description of kinematics
-Version: 0.0.0
-Cflags: -I/home/dennis/project_ws/devel/.private/kinematics/include
-Libs: -L${prefix}/lib 
-Requires: 

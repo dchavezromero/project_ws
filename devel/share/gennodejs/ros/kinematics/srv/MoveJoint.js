@@ -1,1 +1,0 @@
-/home/dennis/project_ws/devel/.private/kinematics/share/gennodejs/ros/kinematics/srv/MoveJoint.js

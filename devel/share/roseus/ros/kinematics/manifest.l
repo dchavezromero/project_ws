@@ -1,1 +1,0 @@
-/home/dennis/project_ws/devel/.private/kinematics/share/roseus/ros/kinematics/manifest.l

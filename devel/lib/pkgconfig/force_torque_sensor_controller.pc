@@ -1,1 +1,0 @@
-/home/dennis/project_ws/devel/.private/force_torque_sensor_controller/lib/pkgconfig/force_torque_sensor_controller.pc

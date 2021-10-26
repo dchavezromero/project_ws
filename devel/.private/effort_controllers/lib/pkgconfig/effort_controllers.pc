@@ -1,8 +1,0 @@
-prefix=/home/dennis/project_ws/devel/.private/effort_controllers
-
-Name: effort_controllers
-Description: Description of effort_controllers
-Version: 0.17.2
-Cflags: -I/home/dennis/project_ws/src/ros_controllers/effort_controllers/include
-Libs: -L${prefix}/lib -leffort_controllers
-Requires: angles controller_interface control_msgs control_toolbox forward_command_controller realtime_tools urdf
