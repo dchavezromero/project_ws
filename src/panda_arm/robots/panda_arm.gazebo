@@ -70,25 +70,25 @@
 
 
   <!-- Hand -->
-  <!-- <gazebo reference="panda_hand">
+  <gazebo reference="panda_hand">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
     <material>Gazebo/White</material>
   </gazebo> -->
 
   <!-- Left_Finger -->
-  <!-- <gazebo reference="panda_leftfinger">
+  <gazebo reference="panda_leftfinger">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
     <material>Gazebo/Grey</material>
-  </gazebo> -->
+  </gazebo>
 
   <!-- Right_Finger -->
-  <!-- <gazebo reference="panda_rightfinger">
+  <gazebo reference="panda_rightfinger">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
     <material>Gazebo/Grey</material>
-  </gazebo> -->
+  </gazebo>
 
 
   <!-- <gazebo>
