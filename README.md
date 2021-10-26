@@ -25,7 +25,7 @@ pip install rospkg
 ### OpenCV for Python2
 Needed for computer vision-related packages that the `apriltag_ros` depends on
 ```
-pip install opencv-python
+pip2 install opencv-python==4.2.0.32
 ```
 
 ### `sympy` for Python2
@@ -100,10 +100,10 @@ cd ~/project_ws && source ~/project_ws/devel/setup.bash
 ```
 On a different set of terminals
 ```
-rqt_image_view
-```
-```
 roslaunch apriltag_ros continuous_detection.launch
+```
+```
+rqt_image_view
 ```
 ```
 roslaunch panda_arm panda_arm_rviz.launch
