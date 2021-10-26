@@ -25,7 +25,7 @@ pip install rospkg
 ### OpenCV for Python2
 Needed for computer vision-related packages that the `apriltag_ros` depends on
 ```
-pip install opencv-python
+pip2 install opencv-python==4.2.0.32
 ```
 
 ### `sympy` for Python2
@@ -39,16 +39,13 @@ cd ~
 ```
 To clone the project (needs SSH key setup on your machine -- URL for tutorial: https://docs.github.com/en/enterprise-server@3.0/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)
 ```
-git clone git@github.com:dchavezromero/project_ws.git
+git clone --recursive git@github.com:dchavezromero/project_ws.git
 ```
-Initalize every submodule from our `/src` folder
+Clean and build the workspace
 ```
 cd ~/project_ws
 ```
-```
-git submodule update --init --recursive
-```
-Clean and build the workspace
+Simply carry on if the commands below do not work and run a `catkin clean -y && catkin build` (or vice-versa) at a later time
 ```
 catkin clean -b && catkin clean -y
 ```
@@ -100,10 +97,10 @@ cd ~/project_ws && source ~/project_ws/devel/setup.bash
 ```
 On a different set of terminals
 ```
-rqt_image_view
-```
-```
 roslaunch apriltag_ros continuous_detection.launch
+```
+```
+rqt_image_view
 ```
 ```
 roslaunch panda_arm panda_arm_rviz.launch
