@@ -2,7 +2,7 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="panda">
   <gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-      <robotNamespace>/</robotNamespace>
+      <robotNamespace>/panda_arm</robotNamespace>
       <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
     </plugin>
   </gazebo>
@@ -70,25 +70,25 @@
 
 
   <!-- Hand -->
-  <gazebo reference="panda_hand">
+  <!-- <gazebo reference="panda_hand">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
     <material>Gazebo/White</material>
-  </gazebo>
+  </gazebo> -->
 
   <!-- Left_Finger -->
-  <gazebo reference="panda_leftfinger">
+  <!-- <gazebo reference="panda_leftfinger">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
     <material>Gazebo/Grey</material>
-  </gazebo>
+  </gazebo> -->
 
   <!-- Right_Finger -->
-  <gazebo reference="panda_rightfinger">
+  <!-- <gazebo reference="panda_rightfinger">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
     <material>Gazebo/Grey</material>
-  </gazebo>
+  </gazebo> -->
 
 
   <!-- <gazebo>

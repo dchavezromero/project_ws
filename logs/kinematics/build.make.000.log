@@ -1,0 +1,36 @@
+[  0%] Built target geometry_msgs_generate_messages_cpp
+[  0%] Built target _kinematics_generate_messages_check_deps_joint_angles
+[  0%] Built target std_msgs_generate_messages_cpp
+[  0%] Built target _kinematics_generate_messages_check_deps_MoveJoint
+[  0%] Built target sensor_msgs_generate_messages_cpp
+[  0%] Built target geometry_msgs_generate_messages_py
+[  0%] Built target sensor_msgs_generate_messages_py
+[  0%] Built target std_msgs_generate_messages_py
+[  0%] Built target sensor_msgs_generate_messages_eus
+[  0%] Built target std_msgs_generate_messages_eus
+[  0%] Built target geometry_msgs_generate_messages_eus
+[  0%] Built target sensor_msgs_generate_messages_lisp
+[  0%] Built target std_msgs_generate_messages_lisp
+[  0%] Built target geometry_msgs_generate_messages_lisp
+[  0%] Built target sensor_msgs_generate_messages_nodejs
+[  0%] Built target std_msgs_generate_messages_nodejs
+[  0%] Built target geometry_msgs_generate_messages_nodejs
+[  7%] [34m[1mGenerating C++ code from kinematics/joint_angles.msg[0m
+[ 15%] [34m[1mGenerating C++ code from kinematics/MoveJoint.srv[0m
+[ 15%] Built target kinematics_generate_messages_cpp
+[ 23%] [34m[1mGenerating Python from MSG kinematics/joint_angles[0m
+[ 30%] [34m[1mGenerating Python code from SRV kinematics/MoveJoint[0m
+[ 38%] [34m[1mGenerating Python msg __init__.py for kinematics[0m
+[ 46%] [34m[1mGenerating Python srv __init__.py for kinematics[0m
+[ 46%] Built target kinematics_generate_messages_py
+[ 53%] [34m[1mGenerating EusLisp code from kinematics/joint_angles.msg[0m
+[ 61%] [34m[1mGenerating EusLisp code from kinematics/MoveJoint.srv[0m
+[ 69%] [34m[1mGenerating EusLisp manifest code for kinematics[0m
+[ 69%] Built target kinematics_generate_messages_eus
+[ 76%] [34m[1mGenerating Lisp code from kinematics/joint_angles.msg[0m
+[ 84%] [34m[1mGenerating Lisp code from kinematics/MoveJoint.srv[0m
+[ 84%] Built target kinematics_generate_messages_lisp
+[ 92%] [34m[1mGenerating Javascript code from kinematics/joint_angles.msg[0m
+[100%] [34m[1mGenerating Javascript code from kinematics/MoveJoint.srv[0m
+[100%] Built target kinematics_generate_messages_nodejs
+[100%] Built target kinematics_generate_messages

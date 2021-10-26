@@ -1,21 +1,14 @@
-[ 80%] Built target apriltag
-[ 90%] Built target apriltag_python
-[ 95%] Built target apriltag_demo
-[100%] Built target opencv_demo
+[35m[1mConsolidate compiler generated dependencies of target apriltag[0m
+[ 88%] Built target apriltag
+[35m[1mConsolidate compiler generated dependencies of target opencv_demo[0m
+[ 94%] Built target opencv_demo
+[35m[1mConsolidate compiler generated dependencies of target apriltag_demo[0m
+[100%] Built target apriltag_demo
 [36mInstall the project...[0m
 -- Install configuration: "Release"
 -- Installing: /home/dennis/project_ws/devel/include/apriltag/apriltag.h
 -- Installing: /home/dennis/project_ws/devel/include/apriltag/apriltag_math.h
 -- Installing: /home/dennis/project_ws/devel/include/apriltag/apriltag_pose.h
--- Installing: /home/dennis/project_ws/devel/include/apriltag/tag16h5.h
--- Installing: /home/dennis/project_ws/devel/include/apriltag/tag25h9.h
--- Installing: /home/dennis/project_ws/devel/include/apriltag/tag36h10.h
--- Installing: /home/dennis/project_ws/devel/include/apriltag/tag36h11.h
--- Installing: /home/dennis/project_ws/devel/include/apriltag/tagCircle21h7.h
--- Installing: /home/dennis/project_ws/devel/include/apriltag/tagCircle49h12.h
--- Installing: /home/dennis/project_ws/devel/include/apriltag/tagCustom48h12.h
--- Installing: /home/dennis/project_ws/devel/include/apriltag/tagStandard41h12.h
--- Installing: /home/dennis/project_ws/devel/include/apriltag/tagStandard52h13.h
 -- Installing: /home/dennis/project_ws/devel/include/apriltag/common/doubles.h
 -- Installing: /home/dennis/project_ws/devel/include/apriltag/common/doubles_floats_impl.h
 -- Installing: /home/dennis/project_ws/devel/include/apriltag/common/floats.h
@@ -41,6 +34,15 @@
 -- Installing: /home/dennis/project_ws/devel/include/apriltag/common/zarray.h
 -- Installing: /home/dennis/project_ws/devel/include/apriltag/common/zhash.h
 -- Installing: /home/dennis/project_ws/devel/include/apriltag/common/zmaxheap.h
+-- Installing: /home/dennis/project_ws/devel/include/apriltag/tag16h5.h
+-- Installing: /home/dennis/project_ws/devel/include/apriltag/tag25h9.h
+-- Installing: /home/dennis/project_ws/devel/include/apriltag/tag36h10.h
+-- Installing: /home/dennis/project_ws/devel/include/apriltag/tag36h11.h
+-- Installing: /home/dennis/project_ws/devel/include/apriltag/tagCircle21h7.h
+-- Installing: /home/dennis/project_ws/devel/include/apriltag/tagCircle49h12.h
+-- Installing: /home/dennis/project_ws/devel/include/apriltag/tagCustom48h12.h
+-- Installing: /home/dennis/project_ws/devel/include/apriltag/tagStandard41h12.h
+-- Installing: /home/dennis/project_ws/devel/include/apriltag/tagStandard52h13.h
 -- Installing: /home/dennis/project_ws/devel/lib/libapriltag.so.3.1.0
 -- Installing: /home/dennis/project_ws/devel/lib/libapriltag.so.3
 -- Installing: /home/dennis/project_ws/devel/lib/libapriltag.so
@@ -49,7 +51,6 @@
 -- Installing: /home/dennis/project_ws/devel/share/apriltag/cmake/apriltagConfig.cmake
 -- Installing: /home/dennis/project_ws/devel/share/apriltag/cmake/apriltagConfigVersion.cmake
 -- Installing: /home/dennis/project_ws/devel/lib/pkgconfig/apriltag.pc
--- Installing: /home/dennis/.local/lib/python3.6/site-packages/apriltag.cpython-36m-x86_64-linux-gnu.so
 -- Installing: /home/dennis/project_ws/devel/bin/opencv_demo
 -- Set runtime path of "/home/dennis/project_ws/devel/bin/opencv_demo" to ""
 -- Installing: /home/dennis/project_ws/devel/bin/apriltag_demo

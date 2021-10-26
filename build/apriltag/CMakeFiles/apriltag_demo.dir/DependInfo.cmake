@@ -1,17 +1,14 @@
+
+# Consider dependencies only in project.
+set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
+
 # The set of languages for which implicit dependencies are needed:
 set(CMAKE_DEPENDS_LANGUAGES
-  "C"
   )
-# The set of files for implicit dependencies of each language:
-set(CMAKE_DEPENDS_CHECK_C
-  "/home/dennis/project_ws/src/apriltag/example/apriltag_demo.c" "/home/dennis/project_ws/build/apriltag/CMakeFiles/apriltag_demo.dir/example/apriltag_demo.c.o"
-  )
-set(CMAKE_C_COMPILER_ID "GNU")
 
-# The include file search paths:
-set(CMAKE_C_TARGET_INCLUDE_PATH
-  "/home/dennis/project_ws/src/apriltag"
-  "/apriltag"
+# The set of dependency files which are needed:
+set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/dennis/project_ws/src/apriltag/example/apriltag_demo.c" "CMakeFiles/apriltag_demo.dir/example/apriltag_demo.c.o" "gcc" "CMakeFiles/apriltag_demo.dir/example/apriltag_demo.c.o.d"
   )
 
 # Targets to which this target links.

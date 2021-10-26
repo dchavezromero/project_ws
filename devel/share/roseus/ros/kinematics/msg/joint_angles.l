@@ -1,0 +1,1 @@
+/home/dennis/project_ws/devel/.private/kinematics/share/roseus/ros/kinematics/msg/joint_angles.l

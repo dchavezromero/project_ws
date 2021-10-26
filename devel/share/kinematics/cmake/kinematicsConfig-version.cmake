@@ -1,0 +1,1 @@
+/home/dennis/project_ws/devel/.private/kinematics/share/kinematics/cmake/kinematicsConfig-version.cmake

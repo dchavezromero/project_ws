@@ -10,3 +10,6 @@
 [submodule "src/joint_state_publisher"]
 	path = src/joint_state_publisher
 	url = git@github.com:ros/joint_state_publisher.git
+[submodule "src/ros_controllers"]
+	path = src/ros_controllers
+	url = git@github.com:dchavezromero/ros_controllers.git

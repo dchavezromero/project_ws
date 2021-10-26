@@ -7,7 +7,7 @@ from sensor_msgs.msg import CameraInfo
 rospy.init_node('camera_info', anonymous=True)
 
 pub = rospy.Publisher('/camera_rect/camera_info', CameraInfo, queue_size=10)
-rate = rospy.Rate(60)
+rate = rospy.Rate(14)
 
 while not rospy.is_shutdown():
     q = CameraInfo()

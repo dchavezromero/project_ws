@@ -1,30 +1,14 @@
+
+# Consider dependencies only in project.
+set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
+
 # The set of languages for which implicit dependencies are needed:
 set(CMAKE_DEPENDS_LANGUAGES
-  "CXX"
-  )
-# The set of files for implicit dependencies of each language:
-set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/dennis/project_ws/src/apriltag_ros/apriltag_ros/src/continuous_detector.cpp" "/home/dennis/project_ws/build/apriltag_ros/CMakeFiles/apriltag_ros_continuous_detector.dir/src/continuous_detector.cpp.o"
-  )
-set(CMAKE_CXX_COMPILER_ID "GNU")
-
-# Preprocessor definitions for this target.
-set(CMAKE_TARGET_DEFINITIONS_CXX
-  "ROSCONSOLE_BACKEND_LOG4CXX"
-  "ROS_BUILD_SHARED_LIBS=1"
-  "ROS_PACKAGE_NAME=\"apriltag_ros\""
   )
 
-# The include file search paths:
-set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/home/dennis/project_ws/devel/.private/apriltag_ros/include"
-  "/home/dennis/project_ws/src/apriltag_ros/apriltag_ros/include"
-  "/opt/ros/melodic/include"
-  "/opt/ros/melodic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
-  "/usr/include/opencv"
-  "/usr/include/eigen3"
-  "/home/dennis/project_ws/devel/include"
-  "/home/dennis/project_ws/devel/include/apriltag"
+# The set of dependency files which are needed:
+set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/dennis/project_ws/src/apriltag_ros/apriltag_ros/src/continuous_detector.cpp" "CMakeFiles/apriltag_ros_continuous_detector.dir/src/continuous_detector.cpp.o" "gcc" "CMakeFiles/apriltag_ros_continuous_detector.dir/src/continuous_detector.cpp.o.d"
   )
 
 # Targets to which this target links.
