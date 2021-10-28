@@ -8,6 +8,23 @@ from geometry_msgs.msg import Pose
 
 result = Pose()
 
+def euler_to_quaternion(roll, pitch, yaw):
+    qx = np.sin(roll / 2) * np.cos(pitch / 2) * np.cos(yaw / 2) - np.cos(roll / 2) * np.sin(pitch / 2) * np.sin(yaw / 2)
+    qy = np.cos(roll / 2) * np.sin(pitch / 2) * np.cos(yaw / 2) + np.sin(roll / 2) * np.cos(pitch / 2) * np.sin(yaw / 2)
+    qz = np.cos(roll / 2) * np.cos(pitch / 2) * np.sin(yaw / 2) - np.sin(roll / 2) * np.sin(pitch / 2) * np.cos(yaw / 2)
+    qw = np.cos(roll / 2) * np.cos(pitch / 2) * np.cos(yaw / 2) + np.sin(roll / 2) * np.sin(pitch / 2) * np.sin(yaw / 2)
+
+    quaternions = qx, qy, qz, qw
+    return quaternions
+
+def get_quaternions(rot_matrix):
+    roll = math.atan2(rot_matrix[7], rot_matrix[8])
+    pitch = math.atan2(-rot_matrix[6], math.sqrt(pow(rot_matrix[7], 2) + pow(rot_matrix[8], 2)))
+    yaw = math.atan2(rot_matrix[3], rot_matrix[0])
+
+    quaternions = euler_to_quaternion(math.radians(roll), math.radians(pitch), math.radians(yaw))
+    return quaternions
+
 def skew(v):
     if len(v) == 3:
         S = sym.Matrix([[0, -v[2], v[1]],
@@ -46,10 +63,10 @@ def fkine(S, M, q):
 
     T_n = sym.eye(4)
 
-    for n in n_joints:
-        T_n = T_n*twist_2_ht(S[:,n], q(n))
+    for n in range(n_joints):
+        T_n = T_n*twist_2_ht(S[:,n], q[n])
 
-    T = T_n*M
+    return T_n*M
 
 def calculate_forward_kin(joints):
     # Link length of values (meters)
@@ -92,17 +109,22 @@ def get_position(joint):
 		print("Service call failed: %s"%e)
 
 def callback():
-    d3 = get_position('d3')
-    theta1 = get_position('theta1')
-    theta2 = get_position('theta2')
+    panda_joint1 = get_position('panda_joint1')
+    panda_joint2 = get_position('panda_joint2')
+    panda_joint3 = get_position('panda_joint3')
+    panda_joint4 = get_position('panda_joint4')
+    panda_joint5 = get_position('panda_joint5')
+    panda_joint6 = get_position('panda_joint6')
+    panda_joint7 = get_position('panda_joint7')
 
-    joint_angles = theta1, theta2, d3
+    joint_angles = panda_joint1, panda_joint2, panda_joint3, panda_joint4, panda_joint5, panda_joint6, panda_joint7
 
     trans_matrix = calculate_forward_kin(joint_angles)
-    ee_pos = trans_matrix[0][3], trans_matrix[1][3], trans_matrix[2][3]
-    rot_matrix = trans_matrix[0][0], trans_matrix[0][1], trans_matrix[0][2], \
-                 trans_matrix[1][0], trans_matrix[1][1], trans_matrix[1][2], \
-                 trans_matrix[2][0], trans_matrix[2][1], trans_matrix[2][2]
+
+    ee_pos = trans_matrix[0,3], trans_matrix[1,3], trans_matrix[2,3]
+    rot_matrix = trans_matrix[0,0], trans_matrix[0,1], trans_matrix[0,2], \
+                 trans_matrix[1,0], trans_matrix[1,1], trans_matrix[1,2], \
+                 trans_matrix[2,0], trans_matrix[2,1], trans_matrix[2,2]
 
     quat = get_quaternions(rot_matrix)
 
@@ -117,14 +139,14 @@ def callback():
 def main():
 
     rospy.init_node("forward_kinematics")
-    pub = rospy.Publisher("/panda/ee_pose", Pose, queue_size=1)
+    pub = rospy.Publisher("/panda_arm/ee_pose", Pose, queue_size=1)
 
     r = rospy.Rate(10.0)
 
     while not rospy.is_shutdown():
 
         callback()
-        rospy.loginfo(result)
+        # rospy.loginfo(result)
 
         pub.publish(result)
 
