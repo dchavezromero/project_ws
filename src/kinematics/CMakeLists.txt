@@ -56,10 +56,10 @@ add_message_files(
 )
 
 ## Generate services in the 'srv' folder
-# add_service_files(
-#   FILES
-#   MoveJoint.srv
-# )
+add_service_files(
+  FILES
+  MoveJoint.srv
+)
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -74,6 +74,7 @@ generate_messages(
   std_msgs
   geometry_msgs
   sensor_msgs
+  # joint_angles
 )
 
 ################################################
@@ -164,7 +165,7 @@ include_directories(
 ## in contrast to setup.py, you can choose the destination
 catkin_install_python(PROGRAMS
   src/poe.py
-  # src/position_controller_server.py
+  src/position_controller_server.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

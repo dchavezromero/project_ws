@@ -1,7 +1,9 @@
-float64 theta1
-float64 theta2
-float64 theta3
-float64 theta4
-float64 theta5
-float64 theta6
-float64 theta7
+std_msgs/Float64 theta1
+std_msgs/Float64 theta2
+std_msgs/Float64 theta3
+std_msgs/Float64 theta4
+std_msgs/Float64 theta5
+std_msgs/Float64 theta6
+std_msgs/Float64 theta7
+std_msgs/Float64 finger1
+std_msgs/Float64 finger2
