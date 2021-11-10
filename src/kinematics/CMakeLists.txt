@@ -165,7 +165,6 @@ include_directories(
 ## in contrast to setup.py, you can choose the destination
 catkin_install_python(PROGRAMS
   src/poe.py
-  src/position_controller_server.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
