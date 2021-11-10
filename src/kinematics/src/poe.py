@@ -9,18 +9,32 @@ from geometry_msgs.msg import Pose
 result = Pose()
 
 def euler_to_quaternion(roll, pitch, yaw):
-    qx = np.sin(roll / 2) * np.cos(pitch / 2) * np.cos(yaw / 2) - np.cos(roll / 2) * np.sin(pitch / 2) * np.sin(yaw / 2)
-    qy = np.cos(roll / 2) * np.sin(pitch / 2) * np.cos(yaw / 2) + np.sin(roll / 2) * np.cos(pitch / 2) * np.sin(yaw / 2)
-    qz = np.cos(roll / 2) * np.cos(pitch / 2) * np.sin(yaw / 2) - np.sin(roll / 2) * np.sin(pitch / 2) * np.cos(yaw / 2)
-    qw = np.cos(roll / 2) * np.cos(pitch / 2) * np.cos(yaw / 2) + np.sin(roll / 2) * np.sin(pitch / 2) * np.sin(yaw / 2)
+    cy = math.cos(yaw * 0.5)
+    sy = math.sin(yaw * 0.5)
+    cp = math.cos(pitch * 0.5)
+    sp = math.sin(pitch * 0.5)
+    cr = math.cos(roll * 0.5)
+    sr = math.sin(roll * 0.5)
 
-    quaternions = qx, qy, qz, qw
+    qw = cy * cp * cr + sy * sp * sr
+    qx = cy * cp * sr - sy * sp * cr
+    qy = sy * cp * sr + cy * sp * cr
+    qz = sy * cp * cr - cy * sp * sr
+
+    quaternions = qw, qx, qy, qz
+
+    # rospy.loginfo(quaternions)
+
     return quaternions
 
 def get_quaternions(rot_matrix):
     roll = math.atan2(rot_matrix[7], rot_matrix[8])
     pitch = math.atan2(-rot_matrix[6], math.sqrt(pow(rot_matrix[7], 2) + pow(rot_matrix[8], 2)))
     yaw = math.atan2(rot_matrix[3], rot_matrix[0])
+
+    euler_angles = roll, pitch, yaw
+
+    # rospy.loginfo(euler_angles)
 
     quaternions = euler_to_quaternion(math.radians(roll), math.radians(pitch), math.radians(yaw))
     return quaternions
@@ -120,6 +134,8 @@ def callback():
     joint_angles = panda_joint1, panda_joint2, panda_joint3, panda_joint4, panda_joint5, panda_joint6, panda_joint7
 
     trans_matrix = calculate_forward_kin(joint_angles)
+
+    # rospy.loginfo(trans_matrix)
 
     ee_pos = trans_matrix[0,3], trans_matrix[1,3], trans_matrix[2,3]
     rot_matrix = trans_matrix[0,0], trans_matrix[0,1], trans_matrix[0,2], \

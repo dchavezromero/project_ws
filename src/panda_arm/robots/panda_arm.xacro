@@ -355,6 +355,17 @@
       <limit effort="20" lower="-0.001" upper="0.04" velocity="0.3"/>
     </joint>
 
+  <link name="ee_link">
+    <origin xyz="0 0 0" rpy="${pi} 0 0"/>
+  </link>
+
+  <joint name="panda_joint9" type="fixed">
+    <origin rpy="0 0 ${pi/4}" xyz="0 0 0"/>
+    <parent link="panda_hand"/>
+    <child link="ee_link"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+
     <!-- Transmission params for joints -->
 
   <transmission name="tran1">
