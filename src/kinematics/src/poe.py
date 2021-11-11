@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import rospy
 import math
-import numpy as np
 import sympy as sym
 from gazebo_msgs.srv import *
 from geometry_msgs.msg import Pose
