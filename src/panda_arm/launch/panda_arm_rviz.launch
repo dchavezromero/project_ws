@@ -14,9 +14,14 @@
 		<arg name="gui" value="false"/>
   	</include>
 
-	<node pkg="robot_state_publisher" type="robot_state_publisher" name="rob_st_pub"/> 
+	<node pkg="robot_state_publisher" type="robot_state_publisher" name="rob_st_pub">
+		<param name="use_tf_static" value="false"/>
+	</node> 
+	
 	<node if="$(arg gui)" name="joint_state_publisher" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />
 	<node unless="$(arg gui)" name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
 	<!-- <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" /> -->
 	<node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
+
+	<!-- <node pkg="tf" type="static_transform_publisher" name="ee_link_broadcaster" args="0 0 0 0 0 0 panda_hand ee_link 100" /> -->
 </launch>
