@@ -1,11 +1,8 @@
 #!/usr/bin/env python
 import rospy
 import tf
-import tf2_ros
-# import sympy as sym
-from gazebo_msgs.srv import *
 from geometry_msgs.msg import PoseStamped
-from apriltag_ros.msg import AprilTagDetectionArray, AprilTagDetection
+from apriltag_ros.msg import AprilTagDetectionArray
 
 result = PoseStamped()
 
