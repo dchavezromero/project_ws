@@ -11,9 +11,6 @@ result = PoseStamped()
 
 
 def callback(msg, tf_listener_):
-    # tf_listener_ = tf_listener_
-
-    # print(msg.detections.id)
 
     position = None
     quaternion = None
@@ -26,9 +23,6 @@ def callback(msg, tf_listener_):
             print(tag_id)
             position, quaternion = tf_listener_.lookupTransform(tag_id, "/ee_link", rospy.Time())
 
-            # print(quaternion[0])
-            # print(type(quaternion))
-            # result.pose.position = position
             result.pose.position.x = position[0]
             result.pose.position.y = position[1]
             result.pose.position.z = position[2]
@@ -48,7 +42,7 @@ def main():
     tf_listener_ = tf.TransformListener()
 
     sub = rospy.Subscriber("/tag_detections", AprilTagDetectionArray, callback, tf_listener_)
-    pub = rospy.Publisher("/panda_arm/ee_in_world", PoseStamped, queue_size=1)
+    pub = rospy.Publisher("/tag_to_ee", PoseStamped, queue_size=1)
 
     r = rospy.Rate(60.0)
 
