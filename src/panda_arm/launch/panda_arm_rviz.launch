@@ -1,25 +1,36 @@
 <launch>
-	<param name="robot_description" textfile="$(find panda_arm)/robots/panda_arm.xacro"/>
+	<!-- <param name="robot_description" textfile="$(find panda_arm)/robots/panda_arm.xacro"/> -->
 	<!-- <node name="spawn" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model panda"/> -->
 	<arg name="model" default="$(find panda_arm)/robots/panda_arm.xacro"/>
-	<arg name="gui" default="true" />
+	<!-- <arg name="gui" default="true" /> -->
 	<arg name="rvizconfig" default="$(find panda_arm)/rviz/urdf.rviz" />
 
-	<param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
+	<!-- <param name="robot_description" command="$(find xacro)/xacro $(arg model)" /> -->
 
 	<include file="$(find gazebo_ros)/launch/empty_world.launch">
-		<arg name="world_name" value="worlds/empty.world"/> 
+		<arg name="world_name" value="$(find panda_arm)/worlds/panda_arm.world"/>
 		<arg name="paused" value="false"/>
 		<arg name="use_sim_time" value="true"/>
 		<arg name="gui" value="false"/>
+		<arg name="headless" default="true"/>
   	</include>
 
-	<node pkg="robot_state_publisher" type="robot_state_publisher" name="rob_st_pub">
+	<!-- Load the URDF into the ROS Parameter Server -->
+	<param name="robot_description"
+		command="$(find xacro)/xacro --inorder '$(find panda_arm)/robots/panda_arm.xacro'" />
+
+	<!-- <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
 		<param name="use_tf_static" value="false"/>
-	</node> 
+	</node>  -->
+
+	<node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+    	args="-urdf -model panda_arm -param robot_description"/>
+
+	<!-- ros_control scara launch file -->
+  	<include file="$(find panda_arm)/launch/panda_arm_control.launch" />
 	
-	<node if="$(arg gui)" name="joint_state_publisher" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />
-	<node unless="$(arg gui)" name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+	<!-- <node if="$(arg gui)" name="joint_state_publisher" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />
+	<node unless="$(arg gui)" name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" /> -->
 	<!-- <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" /> -->
 	<node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
 
