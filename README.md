@@ -1,8 +1,8 @@
-## IMPORTANT!
-This project was developed for Ubuntu 18.04. and ROS Melodic.
-
 # RBE 501 Project
 Final project for RBE501
+
+## IMPORTANT!
+This project was developed for Ubuntu 18.04. and ROS Melodic.
 
 ## Dependencies
 ### `catkin_tool` for setting the build space of our project
