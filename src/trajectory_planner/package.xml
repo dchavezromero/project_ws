@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>transforms</name>
+  <name>trajectory_planner</name>
   <version>0.0.0</version>
   <description>The transforms package</description>
 
