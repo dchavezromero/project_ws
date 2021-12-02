@@ -7,9 +7,11 @@
 
   <link name="panda_link0">
     <inertial>
-      <mass value="2.92" />
-      <origin xyz="-0.025566 -2.88e-05 0.057332" rpy="0 0 0" />
-      <inertia ixx="0.00782229414331" ixy="-1.56191622996e-05" ixz="-0.00126005738123" iyy="0.0109027971813" iyz="1.08233858202e-05" izz="0.0102355503949" />
+      <origin rpy="0 0 0" xyz="-0.041018 -0.00014 0.049974"/>
+      <mass value="0.629769"/>
+      <inertia ixx="0.00315" ixy="8.2904E-07" ixz="0.00015"
+                              iyy="0.00388"    iyz="8.2299E-06"
+                                              izz="0.004285" />
     </inertial>
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -37,9 +39,11 @@
 
   <link name="panda_link1">
     <inertial>
-      <mass value="2.74" />
-      <origin xyz="0 -0.0324958 -0.0675818" rpy="0 0 0" />
-      <inertia ixx="0.0180416958283" ixy="0.0" ixz="0.0" iyy="0.0159136071891" iyz="0.0046758424612" izz="0.00620690827127" />
+      <origin rpy="0 0 0" xyz="0.003875 0.002081 -0.04762"/>
+      <mass value="4.970684"/>
+      <inertia ixx="0.70337" ixy="-0.00013900" ixz="0.0067720"
+                              iyy="0.70661"     iyz="0.019169"
+                                                izz="0.0091170" />
     </inertial>
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -64,14 +68,17 @@
     <parent link="panda_link0"/>
     <child link="panda_link1"/>
     <axis xyz="0 0 1"/>
-    <limit effort="87" lower="-2.8973" upper="2.8973" velocity="2.1750"/>
+    <limit acceleration="15" lower="-2.9671" effort="87" upper="2.9671" velocity="2.5"/>
+    <dynamics D="1" K="7000" mu_coulomb="0" mu_viscous="16" damping="0.003" friction="0.0"/>
   </joint>
 
   <link name="panda_link2">
     <inertial>
-      <mass value="2.74" />
-      <origin xyz="0 -0.06861 0.0322285" rpy="0 0 0" />
-      <inertia ixx="0.0182856182281" ixy="0.0" ixz="0.0" iyy="0.00621358421175" iyz="-0.00472844221905" izz="0.0161514346309" />
+      <origin rpy="0 0 0" xyz=" -0.003141 -0.02872  0.003495"/>
+      <mass value="0.646926"/>
+      <inertia ixx="0.0079620" ixy="-3.9250e-3" ixz="1.0254e-02"
+                                iyy="2.8110e-02" iyz="7.0400e-04"
+                                                izz="2.5995e-02" />
     </inertial>
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -96,14 +103,17 @@
     <parent link="panda_link1"/>
     <child link="panda_link2"/>
     <axis xyz="0 0 1"/>
-    <limit effort="87" lower="-1.7628" upper="1.7628" velocity="2.1750"/>
+    <limit acceleration="7.5" lower="-1.8326" effort="87" upper="1.8326" velocity="2.5"/>
+    <dynamics D="1" K="7000" mu_coulomb="0" mu_viscous="16" damping="0.003" friction="0.0"/>
   </joint>
 
   <link name="panda_link3">
     <inertial>
-      <mass value="2.38" />
-      <origin xyz="0.0469893 0.0316374 -0.031704" rpy="0 0 0" />
-      <inertia ixx="0.00771376630908" ixy="-0.00248490625138" ixz="-0.00332147581033" iyy="0.00989108008727" iyz="-0.00217796151484" izz="0.00811723558464" />
+      <origin rpy="0 0 0" xyz="2.7518e-02 3.9252e-02 -6.6502e-02"/>
+      <mass value="3.228604"/>
+      <inertia ixx="3.7242e-02" ixy="-4.7610e-03" ixz="-1.1396e-02"
+                                iyy="3.6155e-02"  iyz="-1.2805e-02"
+                                                  izz="1.0830e-02" />
     </inertial>
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -128,14 +138,17 @@
     <parent link="panda_link2"/>
     <child link="panda_link3"/>
     <axis xyz="0 0 1"/>
-    <limit effort="87" lower="-2.8973" upper="2.8973" velocity="2.1750"/>
+    <limit acceleration="12.5" lower="-2.9671" effort="87" upper="2.9671" velocity="2.5"/>
+    <dynamics D="1" K="7000" mu_coulomb="0" mu_viscous="16" damping="0.003" friction="0.0"/>
   </joint>
 
   <link name="panda_link4">
     <inertial>
-      <mass value="2.38" />
-      <origin xyz="-0.0360446 0.0336853 0.031882" rpy="0 0 0" />
-      <inertia ixx="0.00799663881132" ixy="0.00347095570217" ixz="-0.00241222942995" iyy="0.00825390705278" iyz="0.00235774044121" izz="0.0102515004345" />
+      <origin rpy="0 0 0" xyz="-5.317e-02 1.04419e-01 2.7454e-02"/>
+      <mass value="3.587895"/>
+      <inertia ixx="2.5853e-02" ixy="7.7960e-03" ixz="-1.3320e-03"
+                                iyy="1.9552e-02" iyz="8.6410e-03"
+                                                  izz="2.8323e-02" />
     </inertial>
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -161,15 +174,18 @@
     <parent link="panda_link3"/>
     <child link="panda_link4"/>
     <axis xyz="0 0 1"/>
-    <limit effort="87" lower="-3.0718" upper="0.0698" velocity="2.1750"/>
+    <limit acceleration="12.5" lower="-3.1416" effort="87" upper="0.0698" velocity="2.5"/>
+    <dynamics D="1" K="7000" mu_coulomb="0" mu_viscous="16" damping="0.003" friction="0.0"/>
     <!-- upper should be -0.0698, but that brakes simulation when initial position for this joint is 0.0 -->
   </joint>
 
   <link name="panda_link5">
     <inertial>
-      <mass value="2.74" />
-      <origin xyz="0 0.0610427 -0.104176" rpy="0 0 0" />
-      <inertia ixx="0.030371374513" ixy="6.50283587108e-07" ixz="-1.05129179916e-05" iyy="0.0288752887402" iyz="-0.00775653445787" izz="0.00444134056164" />
+      <origin rpy="0 0 0" xyz="-1.1953e-02 4.1065e-02 -3.8437e-02"/>
+      <mass value="1.225946"/>
+      <inertia ixx="3.5549e-02" ixy="-2.1170e-03" ixz="-4.0370e-03"
+                                iyy="2.9474e-02"  iyz="2.2900e-04"
+                                                  izz="8.6270e-03" />
     </inertial>
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -194,14 +210,17 @@
     <parent link="panda_link4"/>
     <child link="panda_link5"/>
     <axis xyz="0 0 1"/>
-    <limit effort="12" lower="-2.8973" upper="2.8973" velocity="2.6100"/>
+    <limit acceleration="15" lower="-2.9671" effort="12" upper="2.9671" velocity="3"/>
+    <dynamics D="1" K="7000" mu_coulomb="0" mu_viscous="16" damping="0.003" friction="0.0"/>
   </joint>
 
   <link name="panda_link6">
     <inertial>
-      <mass value="1.55" />
-      <origin xyz="0.0510509 0.009108 0.0106343" rpy="0 0 0" />
-      <inertia ixx="0.00303336450376" ixy="-0.000437276865508" ixz="0.000629257294877" iyy="0.00404479911567" iyz="0.000130472021025" izz="0.00558234286039" />
+      <origin rpy="0 0 0" xyz="6.0149e-02 -1.4117e-02 -1.0517e-02"/>
+      <mass value="1.666555"/>
+      <inertia ixx="1.9640e-03" ixy="1.0900e-04" ixz="-1.1580e-03"
+                                iyy="4.3540e-03" iyz="3.4100e-04"
+                                                  izz="5.4330e-03" />
     </inertial>
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -226,14 +245,17 @@
     <parent link="panda_link5"/>
     <child link="panda_link6"/>
     <axis xyz="0 0 1"/>
-    <limit effort="12" lower="-0.0175" upper="3.7525" velocity="2.6100"/>
+    <limit acceleration="20" lower="-0.0873" effort="12" upper="3.8223" velocity="3"/>
+    <dynamics D="1" K="7000" mu_coulomb="0" mu_viscous="16" damping="0.003" friction="0.0"/>
   </joint>
 
   <link name="panda_link7">
     <inertial>
-      <mass value="0.54" />
-      <origin xyz="0.0109695 0.0107965 0.0650411" rpy="0 0 0" />
-      <inertia ixx="0.000888868887021" ixy="-0.00012239074652" ixz="3.98699829666e-05" iyy="0.000888001373233" iyz="-9.33825115206e-05" izz="0.0007176834609" />
+      <origin rpy="0 0 0" xyz="1.0517e-02 -4.252e-03 6.1597e-02"/>
+      <mass value="7.35522e-01"/>
+      <inertia ixx="1.2516e-02" ixy="-4.2800e-04" ixz="-1.1960e-03"
+                                iyy="1.0027e-02"  iyz="-7.4100e-04"
+                                                  izz="4.8150e-03"/>
     </inertial>
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -258,7 +280,8 @@
     <parent link="panda_link6"/>
     <child link="panda_link7"/>
     <axis xyz="0 0 1"/>
-    <limit effort="12" lower="-2.8973" upper="2.8973" velocity="2.6100"/>
+    <limit acceleration="20" lower="-2.9671" effort="12" upper="2.9671" velocity="3"/>
+    <dynamics D="1" K="7000" mu_coulomb="0" mu_viscous="16" damping="0.003" friction="0.0"/>
   </joint>
 
   <!-- <link name="panda_hand"/> -->
@@ -273,8 +296,10 @@
   <link name="panda_hand">
       <inertial>
         <mass value="0.73" />
-        <origin xyz="0 0.0015244 0.0275912" rpy="0 0 0" />
-        <inertia ixx="0.00278560230025" ixy="0.0" ixz="0.0" iyy="0.000400033405336" iyz="0.0" izz="0.00256378041832" />
+        <origin xyz="-0.01 0 0.03" />
+        <inertia ixx="0.001" ixy="0"      ixz="0"
+                              iyy="0.0025" iyz="0"
+                                          izz="0.0017" />
       </inertial>
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -296,8 +321,9 @@
     <link name="panda_leftfinger">
       <inertial>
         <mass value="0.1" />
-        <origin xyz="0 0.0145644 0.0227941" rpy="0 0 0" />
-        <inertia ixx="3.01220925051e-05" ixy="0.0" ixz="0.0" iyy="2.95873808038e-05" iyz="0.0" izz="6.95125211657e-06" />
+        <inertia ixx="${1./12 * 0.1 * (3 * 0.01**2 + 0.04**2)}" ixy = "0" ixz = "0"
+                iyy="${1./12 * 0.1 * (3 * 0.01**2 + 0.04**2)}" iyz = "0"
+                izz="${1./2  * 0.1 * 0.01**2}" />
       </inertial>
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -319,8 +345,9 @@
     <link name="panda_rightfinger">
       <inertial>
         <mass value="0.1" />
-        <origin xyz="0 0.0145644 0.0227941" rpy="0 0 ${pi}" />
-        <inertia ixx="3.01220925051e-05" ixy="0.0" ixz="0.0" iyy="2.95873808038e-05" iyz="0.0" izz="6.95125211657e-06" />
+        <inertia ixx="${1./12 * 0.1 * (3 * 0.01**2 + 0.04**2)}" ixy = "0" ixz = "0"
+                iyy="${1./12 * 0.1 * (3 * 0.01**2 + 0.04**2)}" iyz = "0"
+                izz="${1./2  * 0.1 * 0.01**2}" />
       </inertial>
       <visual>
         <origin xyz="0 0 0" rpy="0 0 ${pi}"/>
@@ -344,7 +371,8 @@
       <child link="panda_leftfinger"/>
       <origin xyz="0 0 0.0584" rpy="0 0 0"/>
       <axis xyz="0 1 0"/>
-      <limit effort="20" lower="-0.001" upper="0.04" velocity="0.3"/>
+      <limit effort="20" lower="0.0" upper="0.04" velocity="0.2"/>
+      <dynamics friction="0.0" damping="0.03"/>
     </joint>
 
     <joint name="panda_finger_joint2" type="prismatic">
@@ -352,7 +380,8 @@
       <child link="panda_rightfinger"/>
       <origin xyz="0 0 0.0584" rpy="0 0 0"/>
       <axis xyz="0 -1 0"/>
-      <limit effort="20" lower="-0.001" upper="0.04" velocity="0.3"/>
+      <limit effort="20" lower="0.0" upper="0.04" velocity="0.2"/>
+      <dynamics friction="0.0" damping="0.03"/>
     </joint>
 
   <link name="ee_link">
