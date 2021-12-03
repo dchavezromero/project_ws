@@ -28,13 +28,13 @@ def calc_inv_kin(req):
     currentQ = sym.transpose(kin_helper.get_current_joints_vals())
 
     while(kin_helper.norm(target_position - current_position) > 1e-3):
-        print(kin_helper.norm(target_position - current_position))
+        # print(kin_helper.norm(target_position - current_position))
 
         J_a = kin_helper.jacoba(kin_helper.S, kin_helper.M, currentQ)
         # rospy.loginfo(current_position)
         # print(J_a)
 
-        lambda_val = 0.9
+        lambda_val = 1
 
         temp_matrix = J_a * sym.transpose(J_a) * lambda_val**2 * sym.eye(3)
 
@@ -52,13 +52,13 @@ def calc_inv_kin(req):
 
         # print(kin_helper.norm(target_position - current_position))
 
-    result.theta1.data = currentQ[0]
-    result.theta2.data = currentQ[1]
-    result.theta3.data = currentQ[2]
-    result.theta4.data = currentQ[3]
-    result.theta5.data = currentQ[4]
-    result.theta6.data = currentQ[5]
-    result.theta7.data = currentQ[6]
+    result.theta1 = currentQ[0]
+    result.theta2 = currentQ[1]
+    result.theta3 = currentQ[2]
+    result.theta4 = currentQ[3]
+    result.theta5 = currentQ[4]
+    result.theta6 = currentQ[5]
+    result.theta7 = currentQ[6]
 
     return InvKinResponse(result)
 

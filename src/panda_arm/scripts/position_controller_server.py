@@ -25,19 +25,14 @@ set_points = joint_angles()
 
 def update_joint_positions():
     update_joint1.publish(set_points.theta1)
-    
+    update_joint2.publish(set_points.theta2)
     update_joint3.publish(set_points.theta3)
     update_joint4.publish(set_points.theta4)
     update_joint5.publish(set_points.theta5)
     update_joint6.publish(set_points.theta6)
-    
+    update_joint7.publish(set_points.theta7)
     update_finger1.publish(set_points.finger1)
     update_finger2.publish(set_points.finger2)
-    
-    # print(set_points.theta7.data)
-    update_joint7.publish(set_points.theta7)
-
-    update_joint2.publish(set_points.theta2)
 
 def check_limits(req):
     response = False
@@ -57,15 +52,15 @@ def check_limits(req):
     # print((theta1 <= 2.8973 and theta1 >= -2.8973))
 
     # Maybe change to joint limits to be referenced from xacro file
-    if ((theta1.data <= 2.8973 and theta1.data >= -2.8973) 
-    and (theta2.data <= 1.7628 and theta2.data >= -1.7628) 
-    and (theta3.data <= 2.8973 and theta3.data >= -2.8973) 
-    and (theta4.data <= 0.0698 and theta4.data >= -3.0718) 
-    and (theta5.data <= 2.8973 and theta5.data >= -2.8973) 
-    and (theta6.data <= 3.7525 and theta6.data >= -0.0175) 
-    and (theta7.data <= 2.8973 and theta7.data >= -2.8973)
-    and (finger1.data <= 0.04 and finger1.data >= -0.001) 
-    and (finger2.data <= 0.04 and finger2.data >= -0.001)):
+    if ((theta1 <= 2.8973 and theta1 >= -2.8973) 
+    and (theta2 <= 1.7628 and theta2 >= -1.7628) 
+    and (theta3 <= 2.8973 and theta3 >= -2.8973) 
+    and (theta4 <= 0.0698 and theta4 >= -3.0718) 
+    and (theta5 <= 2.8973 and theta5 >= -2.8973) 
+    and (theta6 <= 3.7525 and theta6 >= -0.0175) 
+    and (theta7 <= 2.8973 and theta7 >= -2.8973)
+    and (finger1 <= 0.04 and finger1 >= -0.001) 
+    and (finger2 <= 0.04 and finger2 >= -0.001)):
 
         response = True
 
