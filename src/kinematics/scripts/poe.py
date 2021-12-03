@@ -35,7 +35,7 @@ def calculate_forward_kin(joints):
 
     M = sym.Matrix(sym.BlockMatrix([[top], [bot]]))
 
-    return kin_helper.fkine(S, M, joints)
+    return kin_helper.fkine(S, M, joints, 'space')
                     
 
 def get_position(joint):
@@ -79,6 +79,26 @@ def callback():
     result.orientation.w = quat[3]
 
 def main():
+    # M = sym.Matrix([[0, 1, 0, 0],[0, 0, -1, 0.3], [-1, 0, 0, 0.15], [0, 0, 0, 1]])
+
+    # S = sym.Matrix([
+
+    #      [0,    1,   1],
+    #      [0,         0,         0],
+    # [1,         0,         0],
+    #      [0,        0,         0],
+    #      [0,    0.3,    0.3],
+    #      [0,         0,   -0.3]])
+
+    # q = sym.transpose(sym.Matrix([0.4, 0.3, 0.2]))
+
+    # J_s = kin_helper.jacob0(S,q)
+    # print(J_s)
+    # T = kin_helper.fkine(S,M,q,'space')
+    # print(T)
+    # print(kin_helper.twist_space_2_body(J_s, T))
+
+    # print(kin_helper.jacoba(S, M, q))
 
     rospy.init_node("forward_kinematics")
     pub = rospy.Publisher("/panda_arm/ee_pose", Pose, queue_size=1)

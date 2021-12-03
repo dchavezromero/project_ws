@@ -71,17 +71,77 @@ class CommonFunctions(object):
 
         return self.T
 
-    def fkine(self, S, M, q):
+    def fkine(self, S, M, q, frame):
         self.M = M
 
         n_joints = len(q)
 
-        self.T_n = sym.eye(4)
+        T_n = sym.eye(4)
 
         for n in range(n_joints):
-            self.T_n = self.T_n*self.twist_2_ht(S[:,n], q[n])
+            T_n = T_n*self.twist_2_ht(S[:,n], q[n])
 
-        return self.T_n*self.M
+        if frame == 'space':
+            T_n = T_n*self.M
+        elif frame == 'body':
+            T_n = self.M*T_n
+
+        self.T_n = T_n
+
+        return self.T_n
+
+    def adjoint(self, T):
+        R = T[0:3,0:3]
+        p = T[0:3, 3]
+
+        skew_p = self.skew(p)
+
+        top = sym.Matrix(sym.BlockMatrix([[R, sym.zeros(3)]]))
+        bot = sym.Matrix(sym.BlockMatrix([[skew_p*R, R]]))
+
+        self.adT = sym.Matrix(sym.BlockMatrix([[top], [bot]]))
+
+        return self.adT
+
+    def twist_space_2_body(self,V_s,T):
+        adT = self.adjoint(T)
+        self.V_b = (adT.inv())*V_s
+
+        return self.V_b
+
+    def jacob0(self, S, q):
+        n_joints = len(q)
+        J = sym.zeros(6, n_joints)
+        
+        T_n = sym.eye(4)
+
+        for n in range(n_joints):
+            T_n = T_n*self.twist_2_ht(S[:,n], q[n])
+            J[:, n] = self.adjoint(T_n)*S[:,n]
+
+        self.J = J
+
+        return self.J
+
+    def jacobe(self, S, M, q):
+        J_s = self.jacob0(S,q)
+        T = self.fkine(S,M,q,'space')
+
+        self.J_b = self.twist_space_2_body(J_s, T)
+
+        return self.J_b
+
+    def jacoba(self,S,M,q):
+        T = self.fkine(S,M,q,'space')
+        R = T[0:3, 0:3]
+        J_b = self.jacobe(S,M,q)
+        Jb_v = J_b[3:6,:]
+
+        self.J_a = R*Jb_v
+
+        return self.J_a
+
+
 
 if __name__=='main':
     common_object = CommonFunctions()
