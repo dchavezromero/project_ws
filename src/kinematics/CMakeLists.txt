@@ -59,6 +59,7 @@ add_message_files(
 add_service_files(
   FILES
   MoveJoint.srv
+  InvKin.srv
 )
 
 ## Generate actions in the 'action' folder
@@ -71,8 +72,8 @@ add_service_files(
 ## Generate added messages and services with any dependencies listed here
 generate_messages(
   DEPENDENCIES
-  std_msgs
   geometry_msgs
+  std_msgs
   sensor_msgs
   # joint_angles
 )
@@ -169,6 +170,7 @@ file(GLOB python_scripts_DIR
 
 catkin_install_python(PROGRAMS
   scripts/poe.py
+  scripts/inverse_kinematics_server.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

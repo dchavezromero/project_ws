@@ -2,10 +2,36 @@
 import rospy
 import math
 import sympy as sym
+from gazebo_msgs.srv import *
+from sympy.vector import CoordSys3D
 
 class CommonFunctions(object):
     def __init__(self):
-        pass
+        # Link length of values (meters)
+        L0 = 0.088
+        L1 = 0.333
+        L2 = 0.316
+        L3 = 0.384
+        L4 = 0.107
+        L5 = 0.0825
+
+        self.S = sym.Matrix([[0, 0, 0, 0, 0, 0, 0],
+                        [0, 1, 0, -1, 0, -1, 0],
+                        [1, 0, 1, 0, 1, 0, -1],
+                        [0, -L1, 0, L1+L2, 0, L1+L2+L3, 0],
+                        [0, 0, 0, 0, 0, 0, L0],
+                        [0, 0, 0, -L5, 0, 0, 0]])
+
+        R = sym.Matrix([[1, 0, 0],
+                        [0, -1, 0],
+                        [0, 0, -1]])
+
+        p = sym.Matrix([L0, 0, L1+L2+L3-L4])
+
+        top = sym.Matrix(sym.BlockMatrix([[R, p]]))
+        bot = sym.Matrix([[0, 0, 0, 1]])
+
+        self.M = sym.Matrix(sym.BlockMatrix([[top], [bot]]))
 
     def euler_to_quaternion(self, roll, pitch, yaw):
         cy = math.cos(yaw * 0.5)
@@ -40,13 +66,13 @@ class CommonFunctions(object):
 
     def skew(self, v):
         if len(v) == 3:
-            self.S = sym.Matrix([[0, -v[2], v[1]],
+            self.S_matrix = sym.Matrix([[0, -v[2], v[1]],
             [v[2], 0, -v[0]],
             [-v[1], v[0], 0]])
         else:
             rospy.logerr("argument must be a 3-vector")
 
-        return self.S
+        return self.S_matrix
 
     def axis_angle_2_rot(self, omega, theta):
         omega_ss = self.skew(omega)
@@ -141,7 +167,35 @@ class CommonFunctions(object):
 
         return self.J_a
 
+    def norm(self, vector):
+        C = CoordSys3D('C')
+        v = vector[0]*C.i + vector[1]*C.j + vector[2]*C.k
+        norm = math.sqrt(v.dot(v))
 
+        return norm
+
+    def get_position(self, joint):
+        rospy.wait_for_service('/gazebo/get_joint_properties')
+        try:
+            joint_call = rospy.ServiceProxy('/gazebo/get_joint_properties', GetJointProperties)
+            joint_data = joint_call(joint)
+            position = joint_data.position[0]
+            return position
+        except rospy.ServiceException as e:
+            print("Service call failed: %s"%e)
+
+    def get_current_joints_vals(self):
+        panda_joint1 = self.get_position('panda_joint1')
+        panda_joint2 = self.get_position('panda_joint2')
+        panda_joint3 = self.get_position('panda_joint3')
+        panda_joint4 = self.get_position('panda_joint4')
+        panda_joint5 = self.get_position('panda_joint5')
+        panda_joint6 = self.get_position('panda_joint6')
+        panda_joint7 = self.get_position('panda_joint7')
+
+        self.joint_angles = sym.Matrix([panda_joint1, panda_joint2, panda_joint3, panda_joint4, panda_joint5, panda_joint6, panda_joint7])
+
+        return self.joint_angles
 
 if __name__=='main':
     common_object = CommonFunctions()

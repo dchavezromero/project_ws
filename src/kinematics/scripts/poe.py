@@ -1,63 +1,20 @@
 #!/usr/bin/env python
 import rospy
-import sympy as sym
-from gazebo_msgs.srv import *
 from geometry_msgs.msg import Pose
 from kinematics.common_functions import CommonFunctions as kin
 
 
 result = Pose()
+kin_helper = kin()
 
 def calculate_forward_kin(joints):
-    # Link length of values (meters)
-    L0 = 0.088
-    L1 = 0.333
-    L2 = 0.316
-    L3 = 0.384
-    L4 = 0.107
-    L5 = 0.0825
 
-    S = sym.Matrix([[0, 0, 0, 0, 0, 0, 0],
-                    [0, 1, 0, -1, 0, -1, 0],
-                    [1, 0, 1, 0, 1, 0, -1],
-                    [0, -L1, 0, L1+L2, 0, L1+L2+L3, 0],
-                    [0, 0, 0, 0, 0, 0, L0],
-                    [0, 0, 0, -L5, 0, 0, 0]])
-
-    R = sym.Matrix([[1, 0, 0],
-                    [0, -1, 0],
-                    [0, 0, -1]])
-
-    p = sym.Matrix([L0, 0, L1+L2+L3-L4])
-
-    top = sym.Matrix(sym.BlockMatrix([[R, p]]))
-    bot = sym.Matrix([[0, 0, 0, 1]])
-
-    M = sym.Matrix(sym.BlockMatrix([[top], [bot]]))
-
-    return kin_helper.fkine(S, M, joints, 'space')
+    return kin_helper.fkine(kin_helper.S, kin_helper.M, joints, 'space')
                     
 
-def get_position(joint):
-	rospy.wait_for_service('/gazebo/get_joint_properties')
-	try:
-		joint_call = rospy.ServiceProxy('/gazebo/get_joint_properties', GetJointProperties)
-		joint_data = joint_call(joint)
-		position = joint_data.position[0]
-		return position
-	except rospy.ServiceException as e:
-		print("Service call failed: %s"%e)
-
 def callback():
-    panda_joint1 = get_position('panda_joint1')
-    panda_joint2 = get_position('panda_joint2')
-    panda_joint3 = get_position('panda_joint3')
-    panda_joint4 = get_position('panda_joint4')
-    panda_joint5 = get_position('panda_joint5')
-    panda_joint6 = get_position('panda_joint6')
-    panda_joint7 = get_position('panda_joint7')
 
-    joint_angles = panda_joint1, panda_joint2, panda_joint3, panda_joint4, panda_joint5, panda_joint6, panda_joint7
+    joint_angles = kin_helper.get_current_joints_vals()
 
     trans_matrix = calculate_forward_kin(joint_angles)
 
@@ -101,9 +58,11 @@ def main():
     # print(kin_helper.jacoba(S, M, q))
 
     rospy.init_node("forward_kinematics")
-    pub = rospy.Publisher("/panda_arm/ee_pose", Pose, queue_size=1)
+    
 
-    r = rospy.Rate(10.0)
+    pub = rospy.Publisher('/panda_arm/ee_pose', Pose, queue_size=1)
+
+    r = rospy.Rate(60.0)
 
     while not rospy.is_shutdown():
 
@@ -116,7 +75,6 @@ def main():
 
 if __name__ == "__main__":
     try:
-        kin_helper = kin()
         main()
     except rospy.ROSInterruptException:
         pass
