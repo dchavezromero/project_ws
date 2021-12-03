@@ -27,8 +27,8 @@ def calc_inv_kin(req):
 
     currentQ = sym.transpose(kin_helper.get_current_joints_vals())
 
-    while(kin_helper.norm(target_position - current_position) > 1e-3):
-        # print(kin_helper.norm(target_position - current_position))
+    while((kin_helper.norm(target_position - current_position) > 1e-3) or not kin_helper.check_limits(currentQ)):
+        print(kin_helper.norm(target_position - current_position))
 
         J_a = kin_helper.jacoba(kin_helper.S, kin_helper.M, currentQ)
         # rospy.loginfo(current_position)

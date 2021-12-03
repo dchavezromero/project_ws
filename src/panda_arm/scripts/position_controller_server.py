@@ -6,8 +6,11 @@ import rospy
 from kinematics.srv import MoveJoint,MoveJointResponse
 from kinematics.msg import joint_angles
 from std_msgs.msg import Float64
+from kinematics.common_functions import CommonFunctions as kin
 
+kin_helper = kin()
 ros_rate = 50.0
+set_points = joint_angles()
 
 pub_set_points_topic = rospy.Publisher("/panda_arm/set_points", joint_angles, queue_size=1)
 
@@ -21,7 +24,6 @@ update_joint7 = rospy.Publisher("/panda_arm/panda_joint7_position_controller/com
 update_finger1 = rospy.Publisher("/panda_arm/panda_finger_joint1_controller/command", Float64, queue_size=1)
 update_finger2 = rospy.Publisher("/panda_arm/panda_finger_joint2_controller/command", Float64, queue_size=1)
 
-set_points = joint_angles()
 
 def update_joint_positions():
     update_joint1.publish(set_points.theta1)
@@ -34,8 +36,7 @@ def update_joint_positions():
     update_finger1.publish(set_points.finger1)
     update_finger2.publish(set_points.finger2)
 
-def check_limits(req):
-    response = False
+def callback(req):
 
     theta1 = req.joint_set_points.theta1
     theta2 = req.joint_set_points.theta2
@@ -47,83 +48,21 @@ def check_limits(req):
     finger1 = req.joint_set_points.finger1
     finger2 = req.joint_set_points.finger2
 
+    joint_angles = [theta1, theta2, theta3, theta4, theta5, theta6, theta7, finger1, finger2]
 
-    # print(type(theta1))
-    # print((theta1 <= 2.8973 and theta1 >= -2.8973))
-
-    # Maybe change to joint limits to be referenced from xacro file
-    if (rospy.has_param('/panda_arm/panda_joint1_joint_limits/lower') and
-    rospy.has_param('/panda_arm/panda_joint1_joint_limits/upper') and
-    rospy.has_param('/panda_arm/panda_joint2_joint_limits/lower') and
-    rospy.has_param('/panda_arm/panda_joint2_joint_limits/upper') and
-    rospy.has_param('/panda_arm/panda_joint3_joint_limits/lower') and
-    rospy.has_param('/panda_arm/panda_joint3_joint_limits/upper') and
-    rospy.has_param('/panda_arm/panda_joint4_joint_limits/lower') and
-    rospy.has_param('/panda_arm/panda_joint4_joint_limits/upper') and
-    rospy.has_param('/panda_arm/panda_joint5_joint_limits/lower') and
-    rospy.has_param('/panda_arm/panda_joint5_joint_limits/upper') and
-    rospy.has_param('/panda_arm/panda_joint6_joint_limits/lower') and
-    rospy.has_param('/panda_arm/panda_joint6_joint_limits/upper') and
-    rospy.has_param('/panda_arm/panda_joint7_joint_limits/lower') and
-    rospy.has_param('/panda_arm/panda_joint7_joint_limits/upper') and
-    rospy.has_param('/panda_arm/panda_finger1_joint_limits/lower') and
-    rospy.has_param('/panda_arm/panda_finger1_joint_limits/upper') and
-    rospy.has_param('/panda_arm/panda_finger2_joint_limits/lower') and
-    rospy.has_param('/panda_arm/panda_finger2_joint_limits/upper')):
-
-        theta1_lower_limit = rospy.get_param('/panda_arm/panda_joint1_joint_limits/lower')
-        theta2_lower_limit = rospy.get_param('/panda_arm/panda_joint2_joint_limits/lower')
-        theta3_lower_limit = rospy.get_param('/panda_arm/panda_joint3_joint_limits/lower')
-        theta4_lower_limit = rospy.get_param('/panda_arm/panda_joint4_joint_limits/lower')
-        theta5_lower_limit = rospy.get_param('/panda_arm/panda_joint5_joint_limits/lower')
-        theta6_lower_limit = rospy.get_param('/panda_arm/panda_joint6_joint_limits/lower')
-        theta7_lower_limit = rospy.get_param('/panda_arm/panda_joint7_joint_limits/lower')
-        finger1_lower_limit = rospy.get_param('/panda_arm/panda_finger1_joint_limits/lower')
-        finger2_lower_limit = rospy.get_param('/panda_arm/panda_finger2_joint_limits/lower')
-        theta1_upper_limit = rospy.get_param('/panda_arm/panda_joint1_joint_limits/upper')
-        theta2_upper_limit = rospy.get_param('/panda_arm/panda_joint2_joint_limits/upper')
-        theta3_upper_limit = rospy.get_param('/panda_arm/panda_joint3_joint_limits/upper')
-        theta4_upper_limit = rospy.get_param('/panda_arm/panda_joint4_joint_limits/upper')
-        theta5_upper_limit = rospy.get_param('/panda_arm/panda_joint5_joint_limits/upper')
-        theta6_upper_limit = rospy.get_param('/panda_arm/panda_joint6_joint_limits/upper')
-        theta7_upper_limit = rospy.get_param('/panda_arm/panda_joint7_joint_limits/upper')
-        finger1_upper_limit = rospy.get_param('/panda_arm/panda_finger1_joint_limits/upper')
-        finger2_upper_limit = rospy.get_param('/panda_arm/panda_finger2_joint_limits/upper')
-
-        
-        if ((theta1 <= theta1_upper_limit and theta1 >= theta1_lower_limit) 
-        and (theta2 <= theta2_upper_limit and theta2 >= theta2_lower_limit) 
-        and (theta3 <= theta3_upper_limit and theta3 >= theta3_lower_limit) 
-        and (theta4 <= theta4_upper_limit and theta4 >= theta4_lower_limit) 
-        and (theta5 <= theta5_upper_limit and theta5 >= theta5_lower_limit) 
-        and (theta6 <= theta6_upper_limit and theta6 >= theta6_lower_limit) 
-        and (theta7 <= theta7_upper_limit and theta7 >= theta7_lower_limit)
-        and (finger1 <= finger1_upper_limit and finger1 >= finger1_lower_limit) 
-        and (finger2 <= finger2_upper_limit and finger2 >= finger2_lower_limit)):
-
-            response = True
-
-            set_points.theta1 = theta1
-            set_points.theta2 = theta2
-            set_points.theta3 = theta3
-            set_points.theta4 = theta4
-            set_points.theta5 = theta5
-            set_points.theta6 = theta6
-            set_points.theta7 = theta7
-            set_points.finger1 = finger1
-            set_points.finger2 = finger2
-
-            # pub_setPoint.publish(set_points)
-
-        return response
-    else:
-        rospy.logerr("Joint param limits not loaded")
-        return response
-
-def callback(req):
-    response = check_limits(req)
+    response = kin_helper.check_limits(joint_angles)
 
     if(response):
+        set_points.theta1 = theta1
+        set_points.theta2 = theta2
+        set_points.theta3 = theta3
+        set_points.theta4 = theta4
+        set_points.theta5 = theta5
+        set_points.theta6 = theta6
+        set_points.theta7 = theta7
+        set_points.finger1 = finger1
+        set_points.finger2 = finger2
+
         update_joint_positions()
         # print("here")
         pub_set_points_topic.publish(set_points)
