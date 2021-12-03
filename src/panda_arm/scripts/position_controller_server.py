@@ -52,31 +52,73 @@ def check_limits(req):
     # print((theta1 <= 2.8973 and theta1 >= -2.8973))
 
     # Maybe change to joint limits to be referenced from xacro file
-    if ((theta1 <= 2.8973 and theta1 >= -2.8973) 
-    and (theta2 <= 1.7628 and theta2 >= -1.7628) 
-    and (theta3 <= 2.8973 and theta3 >= -2.8973) 
-    and (theta4 <= 0.0698 and theta4 >= -3.0718) 
-    and (theta5 <= 2.8973 and theta5 >= -2.8973) 
-    and (theta6 <= 3.7525 and theta6 >= -0.0175) 
-    and (theta7 <= 2.8973 and theta7 >= -2.8973)
-    and (finger1 <= 0.04 and finger1 >= -0.001) 
-    and (finger2 <= 0.04 and finger2 >= -0.001)):
+    if (rospy.has_param('/panda_arm/panda_joint1_joint_limits/lower') and
+    rospy.has_param('/panda_arm/panda_joint1_joint_limits/upper') and
+    rospy.has_param('/panda_arm/panda_joint2_joint_limits/lower') and
+    rospy.has_param('/panda_arm/panda_joint2_joint_limits/upper') and
+    rospy.has_param('/panda_arm/panda_joint3_joint_limits/lower') and
+    rospy.has_param('/panda_arm/panda_joint3_joint_limits/upper') and
+    rospy.has_param('/panda_arm/panda_joint4_joint_limits/lower') and
+    rospy.has_param('/panda_arm/panda_joint4_joint_limits/upper') and
+    rospy.has_param('/panda_arm/panda_joint5_joint_limits/lower') and
+    rospy.has_param('/panda_arm/panda_joint5_joint_limits/upper') and
+    rospy.has_param('/panda_arm/panda_joint6_joint_limits/lower') and
+    rospy.has_param('/panda_arm/panda_joint6_joint_limits/upper') and
+    rospy.has_param('/panda_arm/panda_joint7_joint_limits/lower') and
+    rospy.has_param('/panda_arm/panda_joint7_joint_limits/upper') and
+    rospy.has_param('/panda_arm/panda_finger1_joint_limits/lower') and
+    rospy.has_param('/panda_arm/panda_finger1_joint_limits/upper') and
+    rospy.has_param('/panda_arm/panda_finger2_joint_limits/lower') and
+    rospy.has_param('/panda_arm/panda_finger2_joint_limits/upper')):
 
-        response = True
+        theta1_lower_limit = rospy.get_param('/panda_arm/panda_joint1_joint_limits/lower')
+        theta2_lower_limit = rospy.get_param('/panda_arm/panda_joint2_joint_limits/lower')
+        theta3_lower_limit = rospy.get_param('/panda_arm/panda_joint3_joint_limits/lower')
+        theta4_lower_limit = rospy.get_param('/panda_arm/panda_joint4_joint_limits/lower')
+        theta5_lower_limit = rospy.get_param('/panda_arm/panda_joint5_joint_limits/lower')
+        theta6_lower_limit = rospy.get_param('/panda_arm/panda_joint6_joint_limits/lower')
+        theta7_lower_limit = rospy.get_param('/panda_arm/panda_joint7_joint_limits/lower')
+        finger1_lower_limit = rospy.get_param('/panda_arm/panda_finger1_joint_limits/lower')
+        finger2_lower_limit = rospy.get_param('/panda_arm/panda_finger2_joint_limits/lower')
+        theta1_upper_limit = rospy.get_param('/panda_arm/panda_joint1_joint_limits/upper')
+        theta2_upper_limit = rospy.get_param('/panda_arm/panda_joint2_joint_limits/upper')
+        theta3_upper_limit = rospy.get_param('/panda_arm/panda_joint3_joint_limits/upper')
+        theta4_upper_limit = rospy.get_param('/panda_arm/panda_joint4_joint_limits/upper')
+        theta5_upper_limit = rospy.get_param('/panda_arm/panda_joint5_joint_limits/upper')
+        theta6_upper_limit = rospy.get_param('/panda_arm/panda_joint6_joint_limits/upper')
+        theta7_upper_limit = rospy.get_param('/panda_arm/panda_joint7_joint_limits/upper')
+        finger1_upper_limit = rospy.get_param('/panda_arm/panda_finger1_joint_limits/upper')
+        finger2_upper_limit = rospy.get_param('/panda_arm/panda_finger2_joint_limits/upper')
 
-        set_points.theta1 = theta1
-        set_points.theta2 = theta2
-        set_points.theta3 = theta3
-        set_points.theta4 = theta4
-        set_points.theta5 = theta5
-        set_points.theta6 = theta6
-        set_points.theta7 = theta7
-        set_points.finger1 = finger1
-        set_points.finger2 = finger2
+        
+        if ((theta1 <= theta1_upper_limit and theta1 >= theta1_lower_limit) 
+        and (theta2 <= theta2_upper_limit and theta2 >= theta2_lower_limit) 
+        and (theta3 <= theta3_upper_limit and theta3 >= theta3_lower_limit) 
+        and (theta4 <= theta4_upper_limit and theta4 >= theta4_lower_limit) 
+        and (theta5 <= theta5_upper_limit and theta5 >= theta5_lower_limit) 
+        and (theta6 <= theta6_upper_limit and theta6 >= theta6_lower_limit) 
+        and (theta7 <= theta7_upper_limit and theta7 >= theta7_lower_limit)
+        and (finger1 <= finger1_upper_limit and finger1 >= finger1_lower_limit) 
+        and (finger2 <= finger2_upper_limit and finger2 >= finger2_lower_limit)):
 
-        # pub_setPoint.publish(set_points)
+            response = True
 
-    return response
+            set_points.theta1 = theta1
+            set_points.theta2 = theta2
+            set_points.theta3 = theta3
+            set_points.theta4 = theta4
+            set_points.theta5 = theta5
+            set_points.theta6 = theta6
+            set_points.theta7 = theta7
+            set_points.finger1 = finger1
+            set_points.finger2 = finger2
+
+            # pub_setPoint.publish(set_points)
+
+        return response
+    else:
+        rospy.logerr("Joint param limits not loaded")
+        return response
 
 def callback(req):
     response = check_limits(req)

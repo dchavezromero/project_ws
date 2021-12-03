@@ -15,6 +15,10 @@
   <xacro:property name="soft_upper_limit_j6" value="3.7525"/>
   <xacro:property name="soft_lower_limit_j7" value="-2.8973"/>
   <xacro:property name="soft_upper_limit_j7" value="2.8973"/>
+  <xacro:property name="soft_lower_limit_f1" value="0.0"/>
+  <xacro:property name="soft_upper_limit_f1" value="0.04"/>
+  <xacro:property name="soft_lower_limit_f2" value="0.0"/>
+  <xacro:property name="soft_upper_limit_f2" value="0.04"/>
 
   <xacro:include filename="$(find panda_arm)/robots/panda_arm.gazebo"/>
 
@@ -386,7 +390,7 @@
       <child link="panda_leftfinger"/>
       <origin xyz="0 0 0.0584" rpy="0 0 0"/>
       <axis xyz="0 1 0"/>
-      <limit effort="20" lower="0.0" upper="0.04" velocity="0.2"/>
+      <limit effort="20" lower="${soft_lower_limit_f1}" upper="${soft_upper_limit_f1}" velocity="0.2"/>
       <dynamics friction="0.0" damping="0.03"/>
     </joint>
 
@@ -395,7 +399,7 @@
       <child link="panda_rightfinger"/>
       <origin xyz="0 0 0.0584" rpy="0 0 0"/>
       <axis xyz="0 -1 0"/>
-      <limit effort="20" lower="0.0" upper="0.04" velocity="0.2"/>
+      <limit effort="20" lower="${soft_lower_limit_f2}" upper="${soft_upper_limit_f2}" velocity="0.2"/>
       <dynamics friction="0.0" damping="0.03"/>
     </joint>
 

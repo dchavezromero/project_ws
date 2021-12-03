@@ -1,6 +1,8 @@
 <launch>
 	<!-- <param name="robot_description" textfile="$(find panda_arm)/robots/panda_arm.xacro"/> -->
 	<!-- <node name="spawn" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model panda"/> -->
+	<rosparam file="$(find panda_arm)/config/panda_joint_limits.yaml" />
+	
 	<arg name="model" default="$(find panda_arm)/robots/panda_arm.xacro"/>
 	<!-- <arg name="gui" default="true" /> -->
 	<arg name="rvizconfig" default="$(find panda_arm)/rviz/urdf.rviz" />
