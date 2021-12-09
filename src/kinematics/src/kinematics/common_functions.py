@@ -269,13 +269,13 @@ class CommonFunctions(object):
             and (finger1 <= finger1_upper_limit and finger1 >= finger1_lower_limit) 
             and (finger2 <= finger2_upper_limit and finger2 >= finger2_lower_limit)):
 
-                print(theta1, " is within joint 1 angle limits -> LOWER: ", theta1_lower_limit, " | UPPER: ", theta1_upper_limit)
-                print(theta2, " is within joint 2 angle limits -> LOWER: ", theta2_lower_limit, " | UPPER: ", theta2_upper_limit)
-                print(theta3, " is within joint 3 angle limits -> LOWER: ", theta3_lower_limit, " | UPPER: ", theta3_upper_limit)
-                print(theta4, " is within joint 4 angle limits -> LOWER: ", theta4_lower_limit, " | UPPER: ", theta4_upper_limit)
-                print(theta5, " is within joint 5 angle limits -> LOWER: ", theta5_lower_limit, " | UPPER: ", theta5_upper_limit)
-                print(theta6, " is within joint 6 angle limits -> LOWER: ", theta6_lower_limit, " | UPPER: ", theta6_upper_limit)
-                print(theta7, " is within joint 7 angle limits -> LOWER: ", theta7_lower_limit, " | UPPER: ", theta7_upper_limit)
+                # print(theta1, " is within joint 1 angle limits -> LOWER: ", theta1_lower_limit, " | UPPER: ", theta1_upper_limit)
+                # print(theta2, " is within joint 2 angle limits -> LOWER: ", theta2_lower_limit, " | UPPER: ", theta2_upper_limit)
+                # print(theta3, " is within joint 3 angle limits -> LOWER: ", theta3_lower_limit, " | UPPER: ", theta3_upper_limit)
+                # print(theta4, " is within joint 4 angle limits -> LOWER: ", theta4_lower_limit, " | UPPER: ", theta4_upper_limit)
+                # print(theta5, " is within joint 5 angle limits -> LOWER: ", theta5_lower_limit, " | UPPER: ", theta5_upper_limit)
+                # print(theta6, " is within joint 6 angle limits -> LOWER: ", theta6_lower_limit, " | UPPER: ", theta6_upper_limit)
+                # print(theta7, " is within joint 7 angle limits -> LOWER: ", theta7_lower_limit, " | UPPER: ", theta7_upper_limit)
 
                 self.response = True
             else:
