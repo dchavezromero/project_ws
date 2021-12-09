@@ -18,7 +18,7 @@ def callback(msg, tf_listener_):
             tag_num = msg.detections[0].id[0]
             tag_id = '/tag_'+str(tag_num)
             print(tag_id)
-            position, quaternion = tf_listener_.lookupTransform(tag_id, "/world", rospy.Time())
+            position, quaternion = tf_listener_.lookupTransform("/world", tag_id, rospy.Time())
 
             result.pose.position.x = position[0]
             result.pose.position.y = position[1]
