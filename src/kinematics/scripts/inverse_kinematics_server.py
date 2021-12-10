@@ -2,50 +2,65 @@
 
 from kinematics.srv import InvKin,InvKinResponse
 from kinematics.msg import joint_angles
-from geometry_msgs.msg import Pose, Point
+from geometry_msgs.msg import Pose
+from tf.transformations import quaternion_matrix
+import modern_robotics as mr
+import numpy as np
 import rospy
 import time
 import sympy as sym
 from kinematics.common_functions import CommonFunctions as kin
 
 result = joint_angles()
-current_pose = Point()
+current_pose = Pose()
 kin_helper = kin()
 
 def update_current_pose(msg):
-    current_pose.x = msg.position.x
-    current_pose.y = msg.position.y
-    current_pose.z = msg.position.z
-
+    global current_pose
+    current_pose = msg
     # rospy.loginfo(current_pose)
+
+def calc_current_T():
+    global current_pose
+    temp_matrix = quaternion_matrix([current_pose.orientation.x, current_pose.orientation.y, current_pose.orientation.z, current_pose.orientation.w])
+    
+    R = sym.Matrix(temp_matrix[0:3, 0:3])
+
+    p = sym.Matrix([current_pose.position.x, current_pose.position.y, current_pose.position.z])
+
+    top = sym.Matrix(sym.BlockMatrix([[R, p]]))
+    bot = sym.Matrix([[0, 0, 0, 1]])
+
+    return sym.Matrix(sym.BlockMatrix([[top], [bot]]))
+
 
 def calc_inv_kin(req):
 
-    # print(req.target_pose.x)
-
-    current_position = sym.Matrix([current_pose.x, current_pose.y, current_pose.z])
+    current_position = sym.Matrix([current_pose.position.x, current_pose.position.y, current_pose.position.z])
     target_position = sym.Matrix([req.target_pose.x, req.target_pose.y, req.target_pose.z])
 
-    currentQ = sym.transpose(kin_helper.get_current_joints_vals())
+    print("Current pos:", current_position)
+
+    print("Target pos:", target_position)
+
+    currentQ = kin_helper.get_current_joints_vals()
     start_time = time.time()
     counter=0
 
+    T = calc_current_T()
 
     temp_total_J_a_time = 0
     temp_total_delQ_time = 0
 
     while((kin_helper.norm(target_position - current_position) > 1e-3) or not kin_helper.check_limits(currentQ)):
         # print(kin_helper.norm(target_position - current_position))
-    
+
         start_time_J_a = time.time()
-        J_a = kin_helper.jacoba(kin_helper.S, kin_helper.M, currentQ)
+        J_a = kin_helper.jacoba(sym.transpose(kin_helper.S_body), currentQ, T)
         end_time_J_a = time.time()
 
         temp_total_J_a_time = end_time_J_a - start_time_J_a
 
-       # print(J_a)
-        # rospy.loginfo(current_position)
-        # print(J_a)
 
         # lambda_val = 1
 
@@ -59,24 +74,22 @@ def calc_inv_kin(req):
         temp_total_delQ_time = end_time_delQ - start_time_delQ
 
 
-        #deltaQ = J_a.pinv() * (target_position - current_position)
-
-        #print("calculated inv at iter: ", counter)
-        
         # print(currentQ)
         # print(sym.transpose(deltaQ))
-        currentQ = currentQ + sym.transpose(deltaQ)
+        currentQ = currentQ + deltaQ
+        
 
-        # print("here")
-
-        T = kin_helper.fkine(kin_helper.S, kin_helper.M, currentQ, 'space')
+        T = sym.Matrix(mr.FKinSpace(np.array(kin_helper.M).astype(np.float64), 
+                                            np.array(kin_helper.S_space).astype(np.float64), 
+                                            np.array(currentQ).astype(np.float64)))
         current_position = T[0:3, 3]
+
+
+        
         counter+=1
 
         temp_total_J_a_time += temp_total_J_a_time
         temp_total_delQ_time += temp_total_delQ_time
-
-        # print(kin_helper.norm(target_position - current_position))
 
     result.theta1 = currentQ[0]
     result.theta2 = currentQ[1]
