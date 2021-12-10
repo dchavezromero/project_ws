@@ -1,31 +1,43 @@
 #!/usr/bin/env python
 import rospy
+import numpy as np
+import sympy as sym
+import modern_robotics as mr
 from geometry_msgs.msg import Pose
 from kinematics.common_functions import CommonFunctions as kin
+
+from tf.transformations import quaternion_from_matrix
+
+# import time
 
 
 result = Pose()
 kin_helper = kin()
 
-def calculate_forward_kin(joints):
-
-    return kin_helper.fkine(kin_helper.S, kin_helper.M, joints, 'space')
-                    
-
 def callback():
 
     joint_angles = kin_helper.get_current_joints_vals()
 
-    trans_matrix = calculate_forward_kin(joint_angles)
+    # start_time = time.time()
+    # trans_matrix = kin_helper.fkine(kin_helper.S, kin_helper.M, joint_angles, 'space')
 
+    trans_matrix = sym.Matrix(mr.FKinSpace(np.array(kin_helper.M).astype(np.float64), 
+                                            np.array(kin_helper.S_space).astype(np.float64), 
+                                            np.array(joint_angles).astype(np.float64)))
+    # end_time = time.time()
+
+    # elapsed_time = end_time - start_time
+
+    # print("Time to calc forw kin: ", 1/elapsed_time, " Hz")
     # rospy.loginfo(trans_matrix)
+    ee_pos = trans_matrix[0:3,3]
+    # rot_matrix = trans_matrix[0:3,0:3]
 
-    ee_pos = trans_matrix[0,3], trans_matrix[1,3], trans_matrix[2,3]
-    rot_matrix = trans_matrix[0,0], trans_matrix[0,1], trans_matrix[0,2], \
-                 trans_matrix[1,0], trans_matrix[1,1], trans_matrix[1,2], \
-                 trans_matrix[2,0], trans_matrix[2,1], trans_matrix[2,2]
+    # print(np.array(rot_matrix).astype(np.float64))
 
-    quat = kin_helper.get_quaternions(rot_matrix)
+    quat = quaternion_from_matrix(np.array(trans_matrix).astype(np.float64))
+
+    # print(quat)
 
     result.position.x = ee_pos[0]
     result.position.y = ee_pos[1]
@@ -62,12 +74,12 @@ def main():
 
     pub = rospy.Publisher('/panda_arm/ee_pose', Pose, queue_size=1)
 
-    r = rospy.Rate(60.0)
+    r = rospy.Rate(400.0)
 
     while not rospy.is_shutdown():
 
         callback()
-        # rospy.loginfo(result)
+        # rospy.loginfo("test")
 
         pub.publish(result)
 
