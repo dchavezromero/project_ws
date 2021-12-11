@@ -4,12 +4,12 @@ from kinematics.srv import InvKin,InvKinResponse
 from kinematics.msg import joint_angles
 from geometry_msgs.msg import Pose
 from tf.transformations import quaternion_matrix
+from kinematics.common_functions import CommonFunctions as kin
 import modern_robotics as mr
 import numpy as np
 import rospy
 import time
 import sympy as sym
-from kinematics.common_functions import CommonFunctions as kin
 
 result = joint_angles()
 current_pose = Pose()
@@ -36,16 +36,18 @@ def calc_current_T():
 
 def calc_inv_kin(req):
 
+    valid_pose = True
+
     current_position = sym.Matrix([current_pose.position.x, current_pose.position.y, current_pose.position.z])
     target_position = sym.Matrix([req.target_pose.x, req.target_pose.y, req.target_pose.z])
 
-    print("Current pos:", current_position)
-
-    print("Target pos:", target_position)
+    # print("Current pos:", current_position)
+# 
+    # print("Target pos:", target_position)
 
     currentQ = kin_helper.get_current_joints_vals()
-    start_time = time.time()
-    counter=0
+    # start_time = time.time()
+    timeout_counter=0
 
     T = calc_current_T()
 
@@ -83,29 +85,45 @@ def calc_inv_kin(req):
                                             np.array(kin_helper.S_space).astype(np.float64), 
                                             np.array(currentQ).astype(np.float64)))
         current_position = T[0:3, 3]
-
-
         
-        counter+=1
+        timeout_counter+=1
 
+        if timeout_counter == 20:
+            rospy.logerr(result)
+            valid_pose = False
+            break
+            
+         
         temp_total_J_a_time += temp_total_J_a_time
         temp_total_delQ_time += temp_total_delQ_time
 
-    result.theta1 = currentQ[0]
-    result.theta2 = currentQ[1]
-    result.theta3 = currentQ[2]
-    result.theta4 = currentQ[3]
-    result.theta5 = currentQ[4]
-    result.theta6 = currentQ[5]
-    result.theta7 = currentQ[6]
 
-    end_time = time.time()
-    print("iters in loop: ", counter)
-    time_elapsed = end_time - start_time
-    print("Time to calc inv kin: ", time_elapsed, " seconds")
+    print(valid_pose)
+    if valid_pose == True:
+        result.theta1 = currentQ[0]
+        result.theta2 = currentQ[1]
+        result.theta3 = currentQ[2]
+        result.theta4 = currentQ[3]
+        result.theta5 = currentQ[4]
+        result.theta6 = currentQ[5]
+        result.theta7 = currentQ[6]
+    else:   
+        # print("here")
+        result.theta1 = 0
+        result.theta2 = 0
+        result.theta3 = 0
+        result.theta4 = 0
+        result.theta5 = 0
+        result.theta6 = 0
+        result.theta7 = 0
 
-    print("total time calculating analytical jacobians: ", temp_total_J_a_time)
-    print("total time calcuting deltaQ: ", temp_total_delQ_time)
+    # end_time = time.time()
+    # print("iters in loop: ", timeout_counter)
+    # time_elapsed = end_time - start_time
+    # print("Time to calc inv kin: ", time_elapsed, " seconds")
+
+    # print("total time calculating analytical jacobians: ", temp_total_J_a_time)
+    # print("total time calcuting deltaQ: ", temp_total_delQ_time)
 
     return InvKinResponse(result)
 
