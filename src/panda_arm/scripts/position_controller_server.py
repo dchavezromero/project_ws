@@ -24,8 +24,10 @@ update_joint7 = rospy.Publisher("/panda_arm/panda_joint7_position_controller/com
 update_finger1 = rospy.Publisher("/panda_arm/panda_finger_joint1_controller/command", Float64, queue_size=1)
 update_finger2 = rospy.Publisher("/panda_arm/panda_finger_joint2_controller/command", Float64, queue_size=1)
 
-
 def update_joint_positions():
+
+    print(set_points)
+
     update_joint1.publish(set_points.theta1)
     update_joint2.publish(set_points.theta2)
     update_joint3.publish(set_points.theta3)
@@ -73,6 +75,7 @@ def position_controller_server():
     rospy.init_node('position_controller_server')
     s = rospy.Service('position_controller', MoveJoint, callback)
     print("Ready to drive joints.")
+
     # rospy.spin()
 
     r = rospy.Rate(ros_rate)

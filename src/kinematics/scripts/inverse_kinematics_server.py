@@ -109,15 +109,15 @@ def calc_inv_kin(req):
         result.theta7 = currentQ[6]
     else:   
         # print("here")
-        
 
-        result.theta1 = 0
-        result.theta2 = 0
-        result.theta3 = 0
-        result.theta4 = 0
-        result.theta5 = 0
-        result.theta6 = 0
-        result.theta7 = 0
+        result.theta1 = 0.0 
+        result.theta2 = -0.6 
+        result.theta3 = 0.0 
+        result.theta4 = -1.5 
+        result.theta5 = 0.0
+        result.theta6 = 2.4 
+        result.theta7 = 0.0 
+
 
     end_time = time.time()
     print("iters in loop: ", timeout_counter)

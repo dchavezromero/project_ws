@@ -5,9 +5,9 @@ from trajectory_planner.msg import ApriltagData
 
 last_tag_status = False
 
-position_offset_x = 0.0879895132931
-position_offset_y = 0.000217049942842
-position_offset_z = 0.925964526065
+position_offset_x = 0.252583559435
+position_offset_y = 1.96604850032e-06
+position_offset_z = 1.02348540441
 
 result = Point()
 initial_position = Point()
