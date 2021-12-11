@@ -33,6 +33,11 @@ pip2 install opencv-python==4.2.0.32
 pip2 install sympy
 ```
 
+### `modern_robotics` for Python2
+```
+pip install modern_robotics
+```
+
 ## Installation instructions
 ```
 cd ~
