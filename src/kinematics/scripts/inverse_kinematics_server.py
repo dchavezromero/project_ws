@@ -46,7 +46,7 @@ def calc_inv_kin(req):
     # print("Target pos:", target_position)
 
     currentQ = kin_helper.get_current_joints_vals()
-    # start_time = time.time()
+    start_time = time.time()
     timeout_counter=0
 
     T = calc_current_T()
@@ -88,7 +88,7 @@ def calc_inv_kin(req):
         
         timeout_counter+=1
 
-        if timeout_counter == 20:
+        if timeout_counter == 5:
             rospy.logerr(result)
             valid_pose = False
             break
@@ -109,6 +109,8 @@ def calc_inv_kin(req):
         result.theta7 = currentQ[6]
     else:   
         # print("here")
+        
+
         result.theta1 = 0
         result.theta2 = 0
         result.theta3 = 0
@@ -117,10 +119,10 @@ def calc_inv_kin(req):
         result.theta6 = 0
         result.theta7 = 0
 
-    # end_time = time.time()
-    # print("iters in loop: ", timeout_counter)
-    # time_elapsed = end_time - start_time
-    # print("Time to calc inv kin: ", time_elapsed, " seconds")
+    end_time = time.time()
+    print("iters in loop: ", timeout_counter)
+    time_elapsed = end_time - start_time
+    print("Time to calc inv kin: ", time_elapsed, " seconds")
 
     # print("total time calculating analytical jacobians: ", temp_total_J_a_time)
     # print("total time calcuting deltaQ: ", temp_total_delQ_time)
