@@ -173,6 +173,7 @@ catkin_install_python(PROGRAMS
   scripts/desired_position_publisher.py
   scripts/position_tracking.py
   scripts/trajectory_controller_server.py
+  scripts/data_recorder.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 # 
