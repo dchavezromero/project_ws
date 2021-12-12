@@ -1,20 +1,11 @@
 <launch>
 
   <!-- Load joint controller configurations from YAML file to parameter server -->
-  <rosparam file="$(find panda_arm)/config/panda_arm_control.yaml" command="load"/>
+  <rosparam file="$(find panda_arm)/config/trajectory_controller.yaml" command="load"/>
 
   <!-- load the controllers -->
   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
-	output="screen" ns="/panda_arm" args="joint_state_controller
-					  panda_joint1_position_controller
-					  panda_joint2_position_controller
-                    panda_joint3_position_controller
-                    panda_joint4_position_controller
-                    panda_joint5_position_controller
-                    panda_joint6_position_controller
-                    panda_joint7_position_controller
-                    panda_finger_joint1_controller
-                    panda_finger_joint2_controller"/>
+	output="screen" ns="/panda_arm" args="joint_state_controller arm_controller gripper_controller"/>
 
   <!-- convert joint states to TF transforms for rviz, etc -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"

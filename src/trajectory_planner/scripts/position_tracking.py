@@ -17,10 +17,9 @@ def get_joint_values(position):
         print("Service call failed: %s"%e)
 
 def write_position(joint_vals):
-    rospy.wait_for_service('/position_controller')
-
+    rospy.wait_for_service('/trajectory_controller')
     try:
-        joint_call = rospy.ServiceProxy('/position_controller', MoveJoint)
+        joint_call = rospy.ServiceProxy('/trajectory_controller', MoveJoint)
         joint_req = MoveJointRequest()
         joint_req.joint_set_points = joint_vals.joint_vals
         joint_call(joint_req)
@@ -34,11 +33,8 @@ def callback(desired_point):
     print(desired_point)
 
     joint_vals = get_joint_values(desired_point)
-
-    # print(joint_vals)
     write_position(joint_vals)
 
-    # print(joint_vals)
     
 def main():
     rospy.init_node("position_tracker")

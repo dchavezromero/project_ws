@@ -14,6 +14,9 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   geometry_msgs
+  trajectory_msgs
+  kinematics
+  sensor_msgs
   # tf_msgs
   # tf2_msgs
 )
@@ -58,11 +61,10 @@ add_message_files(
 )
 
 ## Generate services in the 'srv' folder
-# add_service_files(
-#   FILES
-#   Service1.srv
-#   Service2.srv
-# )
+add_service_files(
+  FILES
+  MoveJoint.srv
+)
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -74,9 +76,10 @@ add_message_files(
 ## Generate added messages and services with any dependencies listed here
 generate_messages(
   DEPENDENCIES
-  std_msgs
-  geometry_msgs
-  std_msgs
+  # std_msgs
+  # geometry_msgs
+  # trajectory_msgs
+  kinematics
 )
 
 ################################################
@@ -169,6 +172,8 @@ catkin_install_python(PROGRAMS
   scripts/transform_publisher.py
   scripts/desired_position_publisher.py
   scripts/position_tracking.py
+  scripts/trajectory_controller_server.py
+  scripts/traj_tester.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 # 
