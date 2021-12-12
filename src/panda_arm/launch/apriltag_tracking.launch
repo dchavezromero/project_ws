@@ -1,0 +1,18 @@
+<launch>
+
+  <!-- Start trajectory controller node -->
+  <node name="trajectory_controller_server" pkg="apriltag_tracker" type="trajectory_controller_server.py" output="screen"/>
+
+  <!-- Start kinematics nodes -->
+  <node name="forward_kinematics" pkg="kinematics" type="poe.py" output="screen"/>
+  <node name="inverse_kinematics" pkg="kinematics" type="inverse_kinematics_server.py" output="screen"/>
+
+  <!-- Start inverse apriltag detection node -->
+  <include file="$(find apriltag_ros)/launch/continuous_detection.launch" />
+
+  <!-- Start apriltag tracking nodes -->
+  <node name="tag_to_world_transform_pub" pkg="apriltag_tracker" type="transform_publisher.py" output="screen"/>
+  <node name="desired_pose_pub" pkg="apriltag_tracker" type="desired_position_publisher.py" output="screen"/>
+  <node name="position_tracker" pkg="apriltag_tracker" type="position_tracking.py" output="screen"/>
+
+</launch>
