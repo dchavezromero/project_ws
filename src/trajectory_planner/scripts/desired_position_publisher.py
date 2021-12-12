@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+
 import rospy
 from geometry_msgs.msg import Point
 from trajectory_planner.msg import ApriltagData
@@ -50,7 +51,8 @@ def callback(msg):
     
 def main():
     rospy.init_node("desired_pose_pub")
-
+    init_msg = "Ready to calculate desired Apriltag positions!"
+    rospy.loginfo(init_msg)
     sub = rospy.Subscriber("/tag_in_world", ApriltagData, callback)
     pub = rospy.Publisher("/desired_point", Point, queue_size=1)
 

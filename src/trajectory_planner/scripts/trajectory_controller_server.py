@@ -16,8 +16,6 @@ update_trajectory = rospy.Publisher('/panda_arm/arm_controller/command', JointTr
 
 def update_joint_positions():
     arm_trajectory = JointTrajectory()
-    
-    # print("sending trajectories!")
     goal_positions = [set_points.theta1,
     set_points.theta2,
     set_points.theta3,
@@ -70,7 +68,6 @@ def callback(req):
         set_points.finger2 = finger2
 
         update_joint_positions()
-        # print("here")
         pub_set_points_topic.publish(set_points)
 
     return MoveJointResponse(response)
@@ -78,7 +75,8 @@ def callback(req):
 def trajectory_controller_server():
     rospy.init_node('trajectory_controller_server')
     s = rospy.Service('trajectory_controller', MoveJoint, callback)
-    print("Ready to drive joints.")
+    init_msg = "Ready to drive joints!"
+    rospy.loginfo(init_msg)
 
     r = rospy.Rate(ros_rate)
 
