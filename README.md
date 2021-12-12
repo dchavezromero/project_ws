@@ -88,23 +88,19 @@ Once you are done calibrating run
 catkin build
 ```
 
-### Print a sample apriltag from the tag36h11 family from this link
+### Print a sample apriltag from the tag36h11 family (Tag ID: 4) from this link
 
 https://mega.nz/file/BJY3yQyQ#xkId2YbRF0LyPksN9ykok3dREEPiXEPVEMFOuhKWmt4
 
-## Running the sample apriltag detection node
+## Running the project
 ```
 cd ~/project_ws && source ~/project_ws/devel/setup.bash
 ```
 On a different set of terminals
 ```
-roslaunch apriltag_ros continuous_detection.launch
-```
-```
-rqt_image_view
-```
-```
 roslaunch panda_arm panda_arm_rviz.launch
 ```
-Place the arpiltag in front of your camera.
-On RVIZ, change the base frame to `tagN` and then to `world` 
+```
+roslaunch panda_arm apriltag_tracking.launch
+```
+Have fun!
