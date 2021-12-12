@@ -1,0 +1,3 @@
+kinematics/joint_angles joint_set_points
+---
+bool valid_position
